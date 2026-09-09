@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "NG_CLI_ANALYTICS=false ng serve --host localhost --port 4200 --configuration development",
-    "build": "NG_CLI_ANALYTICS=false ng build --configuration production",
-    "serve": "NG_CLI_ANALYTICS=false ng serve --host localhost --port 4200 --configuration production",
-    "typecheck": "NG_CLI_ANALYTICS=false ng build --configuration development --no-progress"
+    "dev": "ng serve --host localhost --port 4200 --configuration development",
+    "build": "ng build --configuration production",
+    "serve": "ng serve --host localhost --port 4200 --configuration production",
+    "typecheck": "ng build --configuration development --no-progress"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

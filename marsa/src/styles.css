@@ -27,51 +27,45 @@
 * { box-sizing: border-box; }
 html { 
   scroll-behavior: smooth;
-  /* Light theme scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: var(--sea) var(--warm);
 }
-html::-webkit-scrollbar {
+
+/* Scrollbar Styles - Light Theme */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sea-bright) var(--warm);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-html::-webkit-scrollbar-track {
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
   background: var(--warm);
   border-radius: 10px;
 }
-html::-webkit-scrollbar-thumb {
-  background: var(--sea);
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: var(--sea-bright);
   border-radius: 10px;
 }
-html::-webkit-scrollbar-thumb:hover {
-  background: var(--sea-bright);
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:active {
+  background: var(--sea);
 }
-html::-webkit-scrollbar-thumb:active {
-  background: var(--sea-bright);
-}
+
 body {
   margin: 0;
   background: var(--pearl);
   color: var(--ink);
   font-family: 'Manrope', 'Noto Sans Arabic', sans-serif;
   -webkit-font-smoothing: antialiased;
-  /* Light theme scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: var(--sea-bright) var(--warm);
-}
-body::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-body::-webkit-scrollbar-track {
-  background: var(--warm);
-}
-body::-webkit-scrollbar-thumb {
-  background: var(--sea-bright);
-  border-radius: 10px;
-}
-body::-webkit-scrollbar-thumb:hover {
-  background: var(--sea);
 }
 body[data-theme='dark'] {
   --ink: #f2eee4;
@@ -93,20 +87,23 @@ body[data-theme='dark'] {
   scrollbar-width: thin;
   scrollbar-color: var(--sea-bright) var(--warm);
 }
+
 body[data-theme='dark']::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
+
 body[data-theme='dark']::-webkit-scrollbar-track {
   background: var(--warm);
+  border-radius: 10px;
 }
+
 body[data-theme='dark']::-webkit-scrollbar-thumb {
   background: var(--sea-bright);
   border-radius: 10px;
 }
-body[data-theme='dark']::-webkit-scrollbar-thumb:hover {
-  background: var(--sea);
-}
+
+body[data-theme='dark']::-webkit-scrollbar-thumb:hover,
 body[data-theme='dark']::-webkit-scrollbar-thumb:active {
   background: var(--sea);
 }

@@ -27,7 +27,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd marsa && NG_CLI_ANALYTICS=false npx ng serve --host 0.0.0.0 --port 5000 --configuration development"
+args = "cd marsa && NG_CLI_ANALYTICS=false npx ng serve --host 0.0.0.0 --port 5000 --allowed-hosts true --configuration development"
 waitForPort = 5000
 
 [[ports]]

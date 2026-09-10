@@ -25,13 +25,53 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth;
+  /* Light theme scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--sea) var(--warm);
+}
+html::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+html::-webkit-scrollbar-track {
+  background: var(--warm);
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb {
+  background: var(--sea);
+  border-radius: 10px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--sea-bright);
+}
+html::-webkit-scrollbar-thumb:active {
+  background: var(--sea-bright);
+}
 body {
   margin: 0;
   background: var(--pearl);
   color: var(--ink);
   font-family: 'Manrope', 'Noto Sans Arabic', sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Light theme scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--sea-bright) var(--warm);
+}
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--warm);
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--sea-bright);
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--sea);
 }
 body[data-theme='dark'] {
   --ink: #f2eee4;
@@ -49,6 +89,26 @@ body[data-theme='dark'] {
   --sand: #ead7a8;
   --sand-deep: #dcc58f;
   background: var(--pearl);
+  /* Dark theme scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--sea-bright) var(--warm);
+}
+body[data-theme='dark']::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+body[data-theme='dark']::-webkit-scrollbar-track {
+  background: var(--warm);
+}
+body[data-theme='dark']::-webkit-scrollbar-thumb {
+  background: var(--sea-bright);
+  border-radius: 10px;
+}
+body[data-theme='dark']::-webkit-scrollbar-thumb:hover {
+  background: var(--sea);
+}
+body[data-theme='dark']::-webkit-scrollbar-thumb:active {
+  background: var(--sea);
 }
 body[data-theme='dark'] .topbar { background: rgba(8, 20, 22, .82); }
 body[data-theme='dark'] .intro-band,
@@ -423,4 +483,50 @@ blockquote cite { display: block; margin-top: 24px; color: var(--muted); font: 1
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Scrollbar styles for all scrollable elements */
+.request-modal {
+  position: relative;
+  width: min(520px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: 46px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  color: var(--ink);
+  background: var(--pearl);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .25);
+  animation: rise .35s var(--ease) both;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sea) transparent;
+}
+.request-modal::-webkit-scrollbar {
+  width: 8px;
+}
+.request-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+.request-modal::-webkit-scrollbar-thumb {
+  background: var(--sea);
+  border-radius: 4px;
+}
+.request-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--sea-bright);
+}
+
+/* Firefox scrollbar for smooth scroll */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar for modal and scrollable containers in dark mode */
+body[data-theme='dark'] .request-modal {
+  scrollbar-color: var(--sea) transparent;
+}
+body[data-theme='dark'] .request-modal::-webkit-scrollbar-thumb {
+  background: var(--sea);
+}
+body[data-theme='dark'] .request-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--sea-bright);
 }

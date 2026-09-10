@@ -98,7 +98,7 @@
           <div class="step reveal" *ngFor="let step of steps; let i = index"><span class="step-number">0{{ i + 1 }}</span><span class="step-line"></span><h3>{{ text(step) }}</h3></div>
         </div>
         <div class="provisioning-detail reveal">
-          <div class="detail-image"><img src="assets/deck.svg" alt="An arranged yacht deck ready for guests" loading="lazy" /></div>
+          <div class="detail-image"><img src="/assets/marsa-deck.jpg" alt="An arranged yacht deck ready for guests" loading="lazy" /></div>
           <div class="detail-copy"><p class="eyebrow">{{ text(copy.sections.productsEyebrow) }}</p><h3>Considered from the first crate to the last glass.</h3><p>Our team works quietly behind the scenes so the only thing you notice is how ready everything feels.</p><button class="text-link light-link" type="button" (click)="openRequest()">{{ text(copy.sections.request) }} <span>↗</span></button></div>
         </div>
       </div>
@@ -136,7 +136,7 @@
 
     <section class="marina-section reveal" id="about" aria-labelledby="marina-title">
       <div class="section-wrap marina-grid">
-        <div class="marina-image"><img src="assets/jeddah.svg" alt="Jeddah marina at dusk" loading="lazy" /><span class="image-caption">JEDDAH / 21° 32′ N</span></div>
+         <div class="marina-image"><img src="/assets/marsa-jeddah.jpg" alt="Jeddah marina at dusk" loading="lazy" /><span class="image-caption">JEDDAH / 21° 32′ N</span></div>
         <div class="marina-copy"><p class="eyebrow">{{ text(copy.sections.marinaEyebrow) }}</p><h2 id="marina-title">{{ text(copy.sections.marinaTitle) }}</h2><p>{{ text(copy.sections.marinaBody) }}</p><div class="marina-list"><span>Marina delivery</span><span>Yacht support</span><span>Crew assistance</span><span>Special requests</span></div><button class="text-link" type="button" (click)="openRequest()">{{ text(copy.sections.concierge) }} <span>↗</span></button></div>
       </div>
     </section>

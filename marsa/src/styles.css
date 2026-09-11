@@ -148,6 +148,10 @@
     @apply border border-marsa-pearl/30 text-marsa-pearl bg-transparent hover:border-marsa-pearl hover:bg-white/5;
   }
 
+  .field {
+    @apply w-full rounded-marsa-sm border border-transparent bg-marsa-field px-5 py-4 text-[13px] text-marsa-pearl outline-none transition-colors placeholder:text-marsa-pearl/40 focus:border-marsa-sand focus:ring-1 focus:ring-marsa-sand/30 dark:bg-marsa-dark-field;
+  }
+
   /* ── Cards ── */
   .card {
     @apply overflow-hidden rounded-marsa-md bg-marsa-pearl dark:bg-marsa-dark-deep border border-marsa-warm/30 dark:border-white/[0.08] transition-all duration-300;

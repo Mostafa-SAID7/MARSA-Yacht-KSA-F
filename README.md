@@ -1,5 +1,10 @@
 # 🛥️ MARSA — Saudi Marine Hospitality Platform
 
+[![CI Pipeline](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/ci.yml/badge.svg)](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/ci.yml)
+[![Release](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/release.yml/badge.svg)](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/release.yml)
+[![CodeQL Security Scan](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/codeql-analysis.yml)
+[![Close stale issues and PRs](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/stale.yml/badge.svg)](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/actions/workflows/stale.yml)
+
 > Premium bilingual Saudi Red Sea marine hospitality and yacht provisioning experience for owners, captains, crew, and VIP travelers.
 
 ## 🎯 Focus Points
@@ -13,7 +18,7 @@
 ## 📋 Quick Start
 
 ### Prerequisites
-- Node.js 20.x or higher
+- Node.js 24.x or higher
 - npm 10.x or higher
 
 ### Installation

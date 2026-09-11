@@ -1,0 +1,17 @@
+# 1.0.0 (2026-09-11)
+
+
+### Bug Fixes
+
+* add missing tsconfig.app.json configuration file ([53d1ee0](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/53d1ee0291d8e84fcf3fc9b5e4a81bc4c6c53130))
+* **ci:** remove npm plugin from semantic-release and disable label creation ([bb3c755](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/bb3c75570a86cf48b9dbefebc150e978f18f5b22))
+* downgrade to Tailwind v3 for Angular compatibility ([6904cad](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/6904cadaa17cfb81c65837c1522361bd1f3bece0))
+* resolve build errors from merge ([10467fa](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/10467fa826039b7f70b2574eb74e70483002ddbd))
+* update GitHub Actions to latest versions ([16be1ca](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/16be1cad121565e53bee40766e30dc6dd205478a))
+* update npm scripts for Windows compatibility and fix duplicate component ([1676e15](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/1676e15a25dd9a2115a0bd6d56d1c6eff231fa7e))
+
+
+### Features
+
+* add start script to package.json ([a4b8d46](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/a4b8d468607244bdb98d11f108e142582a94214b))
+* enhance motion animations, fix destination text colors, and center header navigation ([9c5a5b2](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/9c5a5b252fdb6839a940e980c09dca65c5f527a6))

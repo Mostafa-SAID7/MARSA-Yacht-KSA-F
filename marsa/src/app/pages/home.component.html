@@ -1,106 +1,19 @@
 <div
   #page
-  class="min-h-screen overflow-hidden bg-marsa-pearl dark:bg-marsa-dark-pearl text-marsa-ink dark:text-marsa-dark-ink"
+  class="min-h-screen overflow-hidden bg-marsa-pearl dark:bg-marsa-dark-canvas text-marsa-ink dark:text-marsa-dark-ink"
   [class.menu-open]="isMenuOpen"
   [class.modal-open]="isRequestOpen"
   [attr.dir]="preferences.locale() === 'ar' ? 'rtl' : 'ltr'"
 >
   <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
-  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
-    <div class="marsa-nav flex items-center gap-4 px-4 md:px-5 h-14 rounded-marsa-pill">
-
-      <!-- Brand Logo -->
-      <a class="flex items-center gap-2.5 hover:opacity-75 transition-opacity shrink-0" routerLink="/" aria-label="MARSA home" (click)="closeMenu()">
-        <span class="flex gap-[3px] items-end" aria-hidden="true">
-          <span class="w-[3px] h-3.5 bg-marsa-sand rounded-full"></span>
-          <span class="w-[3px] h-5 bg-marsa-sand rounded-full"></span>
-          <span class="w-[3px] h-3 bg-marsa-sand rounded-full"></span>
-        </span>
-        <span class="font-bold text-sm tracking-widest text-marsa-pearl">MARSA</span>
-        <span class="text-sm text-marsa-pearl opacity-40 px-1">|</span>
-        <span class="font-semibold text-sm text-marsa-pearl opacity-60">مرسى</span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-7 flex-1 justify-center text-xs font-medium" [attr.aria-label]="text(copy.nav.menu)">
-        <a href="#services"      class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.services) }}</a>
-        <a href="#provisioning"  class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.provisioning) }}</a>
-        <a href="#destinations"  class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.destinations) }}</a>
-        <a href="#about"         class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.about) }}</a>
-      </nav>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-2 md:gap-3 ml-auto shrink-0">
-
-        <!-- Theme toggle -->
-        <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors text-marsa-pearl/70 hover:text-marsa-pearl"
-          type="button" (click)="preferences.toggleTheme()" [attr.aria-label]="text(copy.nav.switchTheme)">
-          <svg *ngIf="preferences.theme() === 'light'" lucideSun    class="w-4 h-4" aria-hidden="true"></svg>
-          <svg *ngIf="preferences.theme() === 'dark'"  lucideMoon   class="w-4 h-4" aria-hidden="true"></svg>
-        </button>
-
-        <!-- Locale toggle -->
-        <button class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-medium text-marsa-pearl/70 hover:text-marsa-pearl hover:bg-white/10 rounded-full transition-colors"
-          type="button" (click)="preferences.toggleLocale()">
-          <svg lucideGlobe class="w-3.5 h-3.5" aria-hidden="true"></svg>
-          <span [class.font-bold]="preferences.locale() === 'en'" [class.opacity-50]="preferences.locale() !== 'en'">EN</span>
-          <span class="opacity-40">/</span>
-          <span [class.font-bold]="preferences.locale() === 'ar'" [class.opacity-50]="preferences.locale() !== 'ar'">ع</span>
-        </button>
-
-        <!-- Request CTA (desktop) -->
-        <button class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-[11px] rounded-full transition-all hover:scale-105 tracking-wide"
-          type="button" (click)="openRequest()">
-          {{ text(copy.nav.request) }}
-          <svg lucideArrowUpRight class="w-3.5 h-3.5" aria-hidden="true"></svg>
-        </button>
-
-        <!-- Mobile menu toggle -->
-        <button class="md:hidden flex items-center justify-center w-8 h-8 text-marsa-pearl hover:bg-white/10 rounded-full transition-colors"
-          type="button" (click)="toggleMenu()"
-          [attr.aria-expanded]="isMenuOpen"
-          [attr.aria-label]="isMenuOpen ? text(copy.nav.close) : text(copy.nav.menu)">
-          <svg *ngIf="!isMenuOpen" lucideMenu class="w-5 h-5" aria-hidden="true"></svg>
-          <svg *ngIf="isMenuOpen"  lucideX    class="w-5 h-5" aria-hidden="true"></svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ═══════════════════════════════ MOBILE MENU ═══════════════════════════════ -->
-  <div class="md:hidden fixed inset-0 z-40 bg-marsa-deep/95 backdrop-blur-lg pt-24 px-6 pb-6 transform transition-transform duration-300"
-    [class.translate-x-full]="!isMenuOpen">
-    <div class="space-y-1">
-      <p class="eyebrow text-marsa-pearl/50 mb-6">{{ text(copy.nav.menu) }}</p>
-      <a href="#services"     class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
-        {{ text(copy.nav.services) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
-      </a>
-      <a href="#provisioning" class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
-        {{ text(copy.nav.provisioning) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
-      </a>
-      <a href="#destinations" class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
-        {{ text(copy.nav.destinations) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
-      </a>
-      <a href="#about"        class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
-        {{ text(copy.nav.about) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
-      </a>
-      <div class="pt-8">
-        <button class="w-full py-3.5 px-6 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-sm rounded-full transition-all flex items-center justify-center gap-2"
-          type="button" (click)="openRequest()">
-          {{ text(copy.nav.request) }}
-          <svg lucideArrowUpRight class="w-4 h-4" aria-hidden="true"></svg>
-        </button>
-      </div>
-    </div>
-  </div>
+  <marsa-header (requestService)="openRequest()" (menuToggled)="setMenuOpen($event)"></marsa-header>
 
   <!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
   <main>
     <app-hero (requestService)="openRequest()"></app-hero>
     <app-intro></app-intro>
-    <app-services></app-services>
-    <app-provisioning (requestService)="openRequest()"></app-provisioning>
     <app-products (requestService)="openRequest()"></app-products>
+    <app-services></app-services>
     <app-destinations></app-destinations>
     <app-about (requestService)="openRequest()"></app-about>
     <app-testimonials></app-testimonials>
@@ -108,87 +21,7 @@
   </main>
 
   <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
-  <footer class="bg-marsa-ink dark:bg-marsa-dark-deep text-marsa-pearl border-t border-white/[0.08]">
-    <div class="max-w-5xl mx-auto px-6 md:px-8 py-16">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
-
-        <!-- Brand -->
-        <div>
-          <a class="flex items-center gap-2.5 mb-5" routerLink="/">
-            <span class="flex gap-[3px] items-end" aria-hidden="true">
-              <span class="w-[3px] h-3 bg-marsa-sand rounded-full"></span>
-              <span class="w-[3px] h-4 bg-marsa-sand rounded-full"></span>
-              <span class="w-[3px] h-2.5 bg-marsa-sand rounded-full"></span>
-            </span>
-            <span class="font-bold text-sm tracking-widest">MARSA</span>
-            <span class="text-sm font-semibold opacity-50">مرسى</span>
-          </a>
-          <p class="text-sm opacity-60 mb-5 leading-relaxed">{{ text(copy.footer.descriptor) }}</p>
-          <span class="text-[9px] font-mono opacity-40 tracking-[0.18em] uppercase">Sea / Service / Saudi</span>
-        </div>
-
-        <!-- Nav -->
-        <div>
-          <p class="eyebrow mb-6">{{ text(copy.footer.navigation) }}</p>
-          <nav class="flex flex-col gap-3.5">
-            <a href="#services"     class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.services) }}</a>
-            <a href="#provisioning" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.provisioning) }}</a>
-            <a href="#destinations" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.destinations) }}</a>
-            <a href="#about"        class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.about) }}</a>
-          </nav>
-        </div>
-
-        <!-- Services -->
-        <div>
-          <p class="eyebrow mb-6">{{ text(copy.footer.services) }}</p>
-          <nav class="flex flex-col gap-3.5">
-            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[0].title) }}</a>
-            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[1].title) }}</a>
-            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[2].title) }}</a>
-            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[3].title) }}</a>
-          </nav>
-        </div>
-
-        <!-- Contact -->
-        <div>
-          <p class="eyebrow mb-6">{{ text(copy.footer.contact) }}</p>
-          <div class="space-y-3.5">
-            <div class="flex items-center gap-2.5 text-sm opacity-60">
-              <svg lucideMapPin class="w-3.5 h-3.5 shrink-0" aria-hidden="true"></svg>
-              {{ text(copy.footer.location) }}
-            </div>
-            <a href="mailto:concierge@marsa.sa" class="flex items-center gap-2.5 text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">
-              <svg lucideMail class="w-3.5 h-3.5 shrink-0" aria-hidden="true"></svg>
-              {{ text(copy.footer.email) }}
-            </a>
-            <a href="tel:+966120000000" class="flex items-center gap-2.5 text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">
-              <svg lucidePhone class="w-3.5 h-3.5 shrink-0" aria-hidden="true"></svg>
-              {{ text(copy.footer.phone) }}
-            </a>
-            <div class="flex gap-3 pt-1">
-              <a href="#contact"
-                class="flex items-center justify-center w-8 h-8 rounded-full border border-white/[0.12] hover:border-marsa-sand hover:text-marsa-sand opacity-60 hover:opacity-100 transition-all"
-                aria-label="Social media">
-                <svg lucideShare2 class="w-3.5 h-3.5" aria-hidden="true"></svg>
-              </a>
-              <a href="#contact"
-                class="flex items-center justify-center w-8 h-8 rounded-full border border-white/[0.12] hover:border-marsa-sand hover:text-marsa-sand opacity-60 hover:opacity-100 transition-all"
-                aria-label="External link">
-                <svg lucideExternalLink class="w-3.5 h-3.5" aria-hidden="true"></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom bar -->
-      <div class="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono opacity-40 tracking-widest">
-        <span>{{ text(copy.footer.rights) }}</span>
-        <span class="uppercase">EN / العربية</span>
-        <span class="uppercase">Built for the Red Sea</span>
-      </div>
-    </div>
-  </footer>
+  <marsa-footer></marsa-footer>
 
   <!-- ═══════════════════════════════ REQUEST MODAL ═══════════════════════════════ -->
   <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-marsa-deep/60 backdrop-blur-md"

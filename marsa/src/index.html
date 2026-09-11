@@ -18,13 +18,13 @@
     <!-- ② Fonts loaded async via media trick — non-render-blocking -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap"
       media="print"
       onload="this.media='all'"
     />
     <!-- Fallback for JS-disabled browsers -->
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" />
     </noscript>
 
     <!-- ③ Preload LCP hero image — browser fetches it immediately -->
@@ -40,14 +40,14 @@
         margin:0;
         background:#f5f2eb;
         color:#122124;
-        font-family:Manrope,'Noto Sans Arabic',sans-serif;
+        font-family:Manrope,'Cairo',sans-serif;
         -webkit-font-smoothing:antialiased;
       }
-      body.dark{background:#0d2224;color:#f2eee4}
+      body.dark{background:#07121a;color:#f2eee4}
       /* Skeleton navbar so layout doesn't shift */
       header{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:50;width:100%;max-width:64rem;padding:0 1rem}
-      /* Hero placeholder background while image loads */
-      section:first-of-type{
+      /* Hero placeholder background while image loads - scoped to app-hero */
+      app-hero section{
         position:relative;min-height:100vh;
         background:#071417;
       }

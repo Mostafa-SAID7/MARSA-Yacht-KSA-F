@@ -1,15 +1,15 @@
     <!-- ── Features Band & Provisioning Form ── -->
     <section class="w-full section-offscreen bg-transparent relative z-10 -mt-[1px]">
       
-      <!-- Shared Dark Container -->
-      <div class="max-w-5xl mx-auto bg-marsa-deep dark:bg-marsa-dark-deep text-marsa-pearl">
+      <!-- Shared Light/Dark Container -->
+      <div class="max-w-5xl mx-auto bg-transparent text-marsa-ink dark:text-marsa-dark-ink">
         
         <!-- Features Band -->
         <div class="w-full py-12 md:py-16 px-6 md:px-8 relative">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
             
             <!-- Col 1 -->
-            <div class="flex flex-col gap-4 reveal">
+            <div class="flex flex-col gap-4 reveal-up delay-100">
               <h3 class="text-[13px] md:text-[14px] font-medium tracking-wide text-marsa-sand">
                 {{ text(copy.featuresBand.col1Title) }}
               </h3>
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Col 2 -->
-            <div class="flex flex-col gap-4 reveal" style="animation-delay: 100ms;">
+            <div class="flex flex-col gap-4 reveal-up delay-200">
               <h3 class="text-[13px] md:text-[14px] font-medium tracking-wide text-marsa-sand">
                 {{ text(copy.featuresBand.col2Title) }}
               </h3>
@@ -29,7 +29,7 @@
             </div>
 
             <!-- Col 3 -->
-            <div class="flex flex-col gap-4 reveal" style="animation-delay: 200ms;">
+            <div class="flex flex-col gap-4 reveal-up delay-300">
               <h3 class="text-[13px] md:text-[14px] font-medium tracking-wide text-marsa-sand">
                 {{ text(copy.featuresBand.col3Title) }}
               </h3>
@@ -40,142 +40,11 @@
 
           </div>
 
-          <!-- Gold Square Button -->
-          <div class="absolute bottom-0 left-0 w-12 h-12 md:w-16 md:h-16 bg-marsa-sand hover:bg-marsa-sand-deep transition-colors cursor-pointer flex items-center justify-center text-marsa-deep">
-            <svg lucideArrowUpRight class="w-5 h-5 md:w-6 md:h-6" strokeWidth="2.5" aria-hidden="true"></svg>
-          </div>
+        <!-- Gold Square Button -->
+        <div class="absolute bottom-0 left-0 w-12 h-12 md:w-16 md:h-16 bg-marsa-sand hover:bg-marsa-sand-deep transition-colors cursor-pointer flex items-center justify-center text-marsa-deep">
+          <svg lucideArrowUpRight class="w-5 h-5 md:w-6 md:h-6" strokeWidth="2.5" aria-hidden="true"></svg>
         </div>
-
-        <!-- Form Section -->
-        <div class="py-16 px-6 md:px-8">
-        <div class="reveal">
-          
-          <!-- Header -->
-          <div class="mb-14">
-            <h2 class="text-3xl md:text-5xl font-bold -tracking-[0.03em] mb-4">
-              {{ text(copy.form.title) }}
-            </h2>
-            <p class="text-[14px] md:text-[15px] opacity-70 max-w-xl leading-relaxed">
-              {{ text(copy.form.subtitle) }}
-            </p>
-          </div>
-
-          <!-- Checkboxes Grid -->
-          <form class="space-y-12">
-            
-            <!-- Galley Row -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-marsa-pearl/10 pt-8">
-              <div class="md:col-span-3">
-                <span class="text-[15px] font-bold text-marsa-sand dark:text-marsa-sand-deep">{{ text(copy.form.galley) }}</span>
-              </div>
-              <div class="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4">
-                
-                <!-- Meat -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.meat) }}</span>
-                </label>
-
-                <!-- Fish -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.fish) }}</span>
-                </label>
-
-                <!-- Dairy -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.dairy) }}</span>
-                </label>
-
-                <!-- Fruit -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.fruit) }}</span>
-                </label>
-
-                <!-- Bread -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.bread) }}</span>
-                </label>
-
-                <!-- Beverages -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.beverages) }}</span>
-                </label>
-
-                <!-- Herbs -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.herbs) }}</span>
-                </label>
-
-                <!-- Bespoke -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.bespoke) }}</span>
-                </label>
-
-                <!-- General -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.general) }}</span>
-                </label>
-
-              </div>
-            </div>
-
-            <!-- Interior Row -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-marsa-pearl/10 pt-8">
-              <div class="md:col-span-3">
-                <span class="text-[15px] font-bold text-marsa-sand dark:text-marsa-sand-deep">{{ text(copy.form.interior) }}</span>
-              </div>
-              <div class="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4">
-                
-                <!-- Toiletries -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.toiletries) }}</span>
-                </label>
-
-                <!-- Flowers -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.flowers) }}</span>
-                </label>
-
-                <!-- Janitorial -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.janitorial) }}</span>
-                </label>
-
-                <!-- Crew -->
-                <label class="flex items-start gap-3 cursor-pointer group">
-                  <div class="w-5 h-5 border border-marsa-pearl/30 rounded-sm group-hover:border-marsa-sand transition-colors mt-0.5 shrink-0 flex items-center justify-center"></div>
-                  <span class="text-[14px] md:text-[15px] font-medium opacity-90">{{ text(copy.form.crew) }}</span>
-                </label>
-
-              </div>
-            </div>
-
-            <!-- Input Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-12">
-              <input type="text" [placeholder]="text(copy.form.name)" class="w-full bg-[#121415] dark:bg-[#0c0d0e] text-marsa-pearl px-5 py-4 text-[13px] outline-none border border-transparent focus:border-marsa-sand placeholder-marsa-pearl/40" />
-              <input type="text" [placeholder]="text(copy.form.phone)" class="w-full bg-[#121415] dark:bg-[#0c0d0e] text-marsa-pearl px-5 py-4 text-[13px] outline-none border border-transparent focus:border-marsa-sand placeholder-marsa-pearl/40" />
-              <input type="text" [placeholder]="text(copy.form.yacht)" class="w-full bg-[#121415] dark:bg-[#0c0d0e] text-marsa-pearl px-5 py-4 text-[13px] outline-none border border-transparent focus:border-marsa-sand placeholder-marsa-pearl/40" />
-              <input type="text" [placeholder]="text(copy.form.chef)" class="w-full bg-[#121415] dark:bg-[#0c0d0e] text-marsa-pearl px-5 py-4 text-[13px] outline-none border border-transparent focus:border-marsa-sand placeholder-marsa-pearl/40" />
-              
-              <button type="button" class="w-full bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-[13px] px-5 py-4 outline-none transition-colors">
-                {{ text(copy.form.submit) }}
-              </button>
-            </div>
-
-          </form>
-        </div>
-        </div>
-
       </div>
-    </section>
+
+    </div>
+  </section>

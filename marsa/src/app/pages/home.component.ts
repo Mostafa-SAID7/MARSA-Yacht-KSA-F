@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { copy, destinations, products, services, steps } from '../data/content';
 import { SitePreferencesService } from '../services/site-preferences.service';
+import { Header } from '../components/layout/header/header';
+import { Footer } from '../components/layout/footer/footer';
 import { HeroComponent } from '../components/sections/hero/hero.component';
 import { IntroComponent } from '../components/sections/intro/intro.component';
 import { ServicesComponent } from '../components/sections/services/services.component';
@@ -22,21 +24,8 @@ import { TestimonialsComponent } from '../components/sections/testimonials/testi
 import { CtaComponent } from '../components/sections/cta/cta.component';
 import {
   LucideArrowUpRight,
-  LucideArrowDown,
-  LucideArrowRight,
-  LucideSun,
-  LucideMoon,
-  LucideGlobe,
-  LucideMenu,
   LucideX,
   LucideCheck,
-  LucidePlus,
-  LucideShare2,
-  LucideAnchor,
-  LucideMapPin,
-  LucidePhone,
-  LucideMail,
-  LucideExternalLink,
 } from '@lucide/angular';
 
 @Component({
@@ -46,10 +35,11 @@ import {
     CommonModule,
     FormsModule,
     RouterLink,
+    Header,
+    Footer,
     HeroComponent,
     IntroComponent,
     ServicesComponent,
-    ProvisioningComponent,
     ProductsComponent,
     DestinationsComponent,
     AboutComponent,
@@ -57,21 +47,8 @@ import {
     CtaComponent,
     // Lucide icon directives (attribute-selector standalone components)
     LucideArrowUpRight,
-    LucideArrowDown,
-    LucideArrowRight,
-    LucideSun,
-    LucideMoon,
-    LucideGlobe,
-    LucideMenu,
     LucideX,
     LucideCheck,
-    LucidePlus,
-    LucideShare2,
-    LucideAnchor,
-    LucideMapPin,
-    LucidePhone,
-    LucideMail,
-    LucideExternalLink,
   ],
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -83,6 +60,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly destinations = destinations;
   readonly steps = steps;
   readonly preferences: SitePreferencesService;
+  readonly sunRayDegrees = [0, 45, 90, 135, 180, 225, 270, 315];
   isMenuOpen = false;
   isRequestOpen = false;
   requestSent = false;
@@ -110,7 +88,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')),
       { threshold: 0.12 },
     );
-    this.page?.nativeElement.querySelectorAll('.reveal').forEach((element) => this.observer?.observe(element));
+    this.page?.nativeElement.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale').forEach((element) => this.observer?.observe(element));
   }
 
   ngOnDestroy(): void {
@@ -121,18 +99,13 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     return this.preferences.text(value);
   }
 
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  closeMenu(): void {
-    this.isMenuOpen = false;
+  setMenuOpen(isOpen: boolean): void {
+    this.isMenuOpen = isOpen;
   }
 
   openRequest(): void {
     this.isRequestOpen = true;
     this.requestSent = false;
-    this.closeMenu();
   }
 
   closeRequest(): void {

@@ -1,37 +1,168 @@
-    <!-- ── Products ── -->
-    <section class="w-full section-offscreen bg-transparent" aria-labelledby="products-title">
-      <div class="max-w-5xl mx-auto px-6 md:px-8 py-20 md:py-28 bg-marsa-deep dark:bg-marsa-dark-deep text-marsa-pearl border-t border-marsa-pearl/10 dark:border-marsa-dark-pearl/10">
-      <div class="mb-16 reveal">
-        <p class="eyebrow mb-4"><span class="eyebrow-line"></span>{{ text(copy.sections.productsEyebrow) }}</p>
-        <h2 id="products-title" class="mb-6">{{ text(copy.sections.productsTitle) }}</h2>
-        <p class="text-lg opacity-60 max-w-xl leading-relaxed">{{ text(copy.sections.productsBody) }}</p>
-      </div>
+    <!-- ── Provisions Directory & Form (Redesigned Layout) ── -->
+    <section class="w-full section-offscreen bg-transparent" aria-labelledby="directory-title">
+      <div class="max-w-5xl mx-auto px-6 md:px-8 py-20 md:py-28 bg-transparent text-marsa-ink dark:text-marsa-dark-ink border-t border-marsa-warm/50 dark:border-marsa-dark-pearl/10">
+        
+        <div class="mb-12 reveal-up">
+          <h2 id="directory-title" class="mb-4 text-3xl md:text-5xl font-bold">{{ text(copy.form.title) }}</h2>
+          <p class="text-base opacity-70 max-w-xl leading-relaxed">{{ text(copy.form.subtitle) }}</p>
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
-        <article class="group reveal card"
-          *ngFor="let product of products; let i = index"
-          [style]="'animation-delay: ' + (i * 80) + 'ms'">
-          <div class="card-image h-56">
-            <img [src]="product.image" [alt]="text(product.name)" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/50 to-transparent"></div>
-            <span class="absolute top-4 left-4 px-2.5 py-1 bg-marsa-deep/70 backdrop-blur-sm text-marsa-pearl text-[9px] font-bold rounded-full tracking-widest uppercase">{{ text(product.category) }}</span>
-            <button class="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold transition-all hover:scale-110 flex items-center justify-center"
-              type="button" (click)="requestService.emit()" [attr.aria-label]="text(copy.sections.request)">
-              <svg lucidePlus class="w-4 h-4" aria-hidden="true"></svg>
+        <form *ngIf="!formSubmitted" (submit)="submitForm($event)" class="reveal-up delay-200 relative z-10">
+          
+          <hr class="border-t border-marsa-warm/50 dark:border-white/10 mb-12" />
+
+          <!-- Galley Section -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div class="col-span-1">
+              <h4 class="font-bold text-marsa-sand-deep text-sm tracking-wide">{{ text(copy.form.galley) }}</h4>
+            </div>
+            <div class="col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8">
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbMeat" name="cbMeat" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.meat) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbFish" name="cbFish" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.fish) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbDairy" name="cbDairy" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.dairy) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbFruit" name="cbFruit" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.fruit) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbBread" name="cbBread" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.bread) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbBeverages" name="cbBeverages" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.beverages) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbHerbs" name="cbHerbs" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.herbs) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbBespoke" name="cbBespoke" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.bespoke) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbGeneral" name="cbGeneral" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.general) }}</span>
+              </label>
+            </div>
+          </div>
+
+          <hr class="border-t border-marsa-warm/50 dark:border-white/10 mb-12" />
+
+          <!-- Interior Section -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+            <div class="col-span-1">
+              <h4 class="font-bold text-marsa-sand-deep text-sm tracking-wide">{{ text(copy.form.interior) }}</h4>
+            </div>
+            <div class="col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8">
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbToiletries" name="cbToiletries" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.toiletries) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbFlowers" name="cbFlowers" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.flowers) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbJanitorial" name="cbJanitorial" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.janitorial) }}</span>
+              </label>
+              <!-- Item -->
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                  <input type="checkbox" [(ngModel)]="cbCrew" name="cbCrew" class="peer appearance-none w-5 h-5 border border-marsa-warm dark:border-white/20 rounded-[4px] bg-transparent checked:bg-marsa-sand checked:border-marsa-sand cursor-pointer transition-colors" />
+                  <svg lucideCheck class="w-3.5 h-3.5 absolute text-marsa-deep pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" aria-hidden="true"></svg>
+                </div>
+                <span class="text-[13px] font-bold opacity-80 group-hover:text-marsa-sand transition-colors">{{ text(copy.form.crew) }}</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Bottom Inputs Row -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <input type="text" [(ngModel)]="requestName" name="name" required [placeholder]="text(copy.form.name)"
+              class="w-full bg-marsa-warm/30 dark:bg-[#0c1a1d] border border-transparent focus:border-marsa-sand rounded-md px-4 py-4 text-xs font-medium opacity-80 placeholder:opacity-50 transition-colors focus:outline-none" />
+              
+            <input type="tel" [(ngModel)]="requestPhone" name="phone" required [placeholder]="text(copy.form.phone)"
+              class="w-full bg-marsa-warm/30 dark:bg-[#0c1a1d] border border-transparent focus:border-marsa-sand rounded-md px-4 py-4 text-xs font-medium opacity-80 placeholder:opacity-50 transition-colors focus:outline-none" />
+              
+            <input type="text" [(ngModel)]="requestYacht" name="yacht" required [placeholder]="text(copy.form.yacht)"
+              class="w-full bg-marsa-warm/30 dark:bg-[#0c1a1d] border border-transparent focus:border-marsa-sand rounded-md px-4 py-4 text-xs font-medium opacity-80 placeholder:opacity-50 transition-colors focus:outline-none" />
+              
+            <input type="text" [(ngModel)]="requestChef" name="chef" [placeholder]="text(copy.form.chef)"
+              class="w-full bg-marsa-warm/30 dark:bg-[#0c1a1d] border border-transparent focus:border-marsa-sand rounded-md px-4 py-4 text-xs font-medium opacity-80 placeholder:opacity-50 transition-colors focus:outline-none" />
+              
+            <button type="submit" class="w-full bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-xs tracking-wide rounded-md py-4 transition-colors uppercase disabled:opacity-50"
+              [disabled]="!requestName || !requestPhone || !requestYacht">
+              {{ text(copy.form.submit) }}
             </button>
           </div>
-          <div class="card-content">
-            <h3 class="font-bold mb-1 -tracking-[0.02em]">{{ text(product.name) }}</h3>
-            <p class="text-sm opacity-50 mb-3 leading-relaxed">{{ text(product.description) }}</p>
-            <span class="text-xs font-bold opacity-60 font-mono">{{ product.price }}</span>
-          </div>
-        </article>
-      </div>
+        </form>
 
-      <button class="inline-flex items-center gap-2.5 px-6 py-3 border border-marsa-pearl/30 hover:border-marsa-sand text-marsa-pearl hover:text-marsa-sand font-bold text-[12px] rounded-full transition-all tracking-wide"
-        type="button" (click)="requestService.emit()">
-        {{ text(copy.sections.viewCollection) }}
-        <svg lucideArrowUpRight class="w-3.5 h-3.5" aria-hidden="true"></svg>
-      </button>
+        <div *ngIf="formSubmitted" class="py-16 flex flex-col items-center justify-center text-center relative z-10 animate-fade reveal-scale">
+          <div class="w-16 h-16 rounded-full bg-marsa-sand text-marsa-deep flex items-center justify-center mb-6 shadow-marsa-glow">
+            <svg lucideCheck class="w-8 h-8" aria-hidden="true"></svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Request Received</h3>
+          <p class="opacity-70 max-w-sm leading-relaxed text-sm">We'll be in touch shortly with our complete Provisions Directory and confirm your details.</p>
+        </div>
+
       </div>
     </section>

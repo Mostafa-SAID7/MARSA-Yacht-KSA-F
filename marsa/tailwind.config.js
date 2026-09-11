@@ -20,6 +20,16 @@ export default {
           warm: '#e8e3d8',
           muted: '#718083',
           accent: '#c37960',
+
+          // ── Semantic layer tokens ──────────────────────────────────────
+          // Layer 0: page canvas (body background)
+          canvas: '#f0ece2',
+          // Layer 1: dark section panels (= marsa-deep, aliased for clarity)
+          panel: '#071417',
+          // Layer 2: cards/inputs that sit INSIDE dark panels
+          card: '#0f1e21',
+          // Layer 3: elevated cards that sit on the LIGHT canvas body
+          surface: '#f5f2eb',
         },
         // Dark mode colors
         'marsa-dark': {
@@ -34,10 +44,20 @@ export default {
           muted: '#a2b0ab',
           sand: '#ead7a8',
           'sand-deep': '#dcc58f',
+
+          // ── Semantic layer tokens (dark mode) ─────────────────────────
+          // Layer 0: page canvas dark
+          canvas: '#07121a',
+          // Layer 1: dark section panels
+          panel: '#061114',
+          // Layer 2: cards/inputs inside dark panels
+          card: '#0c1a1d',
+          // Layer 3: elevated cards on the dark canvas
+          surface: '#0d2224',
         },
       },
       fontFamily: {
-        'marsa': ['Manrope', 'Noto Sans Arabic', 'sans-serif'],
+        'marsa': ['Manrope', 'Cairo', 'sans-serif'],
         'mono': ['DM Mono', 'monospace'],
       },
       borderRadius: {

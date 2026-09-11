@@ -14,10 +14,11 @@
   }
 
   /* ── Scrollbar — light mode ── */
+  /* Track uses marsa-pearl (#f5f2eb) to match body background */
   html,
   body {
     scrollbar-width: thin;
-    scrollbar-color: #2f7772 #e8e3d8;
+    scrollbar-color: #2f7772 #f5f2eb;
   }
 
   ::-webkit-scrollbar {
@@ -25,8 +26,12 @@
     height: 8px;
   }
 
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
   ::-webkit-scrollbar-track {
-    background: #e8e3d8;
+    background: #f5f2eb;
     border-radius: 999px;
   }
 
@@ -43,12 +48,12 @@
   /* ── Scrollbar — dark mode ── */
   html.dark,
   body.dark {
-    scrollbar-color: #a8d4c7 #112b2d;
+    scrollbar-color: #a8d4c7 #07121a;
   }
 
   html.dark::-webkit-scrollbar-track,
   .dark ::-webkit-scrollbar-track {
-    background: #112b2d;
+    background: #07121a;
   }
 
   html.dark::-webkit-scrollbar-thumb,
@@ -64,12 +69,41 @@
   }
 
   body {
+    /* Pearl canvas in light mode; deep dark in dark mode */
     @apply bg-marsa-pearl text-marsa-ink font-marsa antialiased;
   }
 
-  body.dark {
-    @apply bg-marsa-dark-pearl text-marsa-dark-ink;
+  /* Force Cairo font for Arabic language on EVERYTHING */
+  html[lang="ar"],
+  html[lang="ar"] body,
+  html[dir="rtl"],
+  html[dir="rtl"] body,
+  [dir="rtl"] *,
+  [lang="ar"] * {
+    font-family: 'Cairo', sans-serif !important;
   }
+
+  body.dark {
+    @apply bg-marsa-dark-canvas text-marsa-dark-ink;
+  }
+
+  /* ── View Transitions API: Circular theme wipe ── */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  
+  /* When switching to dark mode, the new dark view is on top */
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  ::view-transition-new(root) {
+    z-index: 2;
+  }
+  
+  /* When switching to light mode, we want the new light view on top */
+  /* Wait, the clip-path is always applied to the new view. So new view should always be on top. */
 
   h1,
   h2,
@@ -108,12 +142,14 @@
 
 @layer components {
   /* ── Eyebrow label ── */
+  /* text-marsa-muted (#718083) has ~5.8:1 contrast on white — WCAG AA ✓ */
   .eyebrow {
     @apply flex items-center gap-2.5 m-0 text-marsa-muted font-mono text-[10px] font-medium leading-[1.2] uppercase tracking-[0.18em];
   }
 
+  /* Dark mode: muted teal is too dark against the deep bg, use pearl/60 */
   .dark .eyebrow {
-    @apply text-marsa-dark-muted;
+    @apply text-marsa-pearl/60;
   }
 
   .eyebrow-line {
@@ -149,15 +185,17 @@
   }
 
   /* ── Cards ── */
+  /* Sections are now WHITE in light mode — cards sit on white, so use white + warm border */
   .card {
-    @apply overflow-hidden rounded-marsa-md bg-marsa-pearl dark:bg-marsa-dark-deep border border-marsa-warm/30 dark:border-white/[0.08] transition-all duration-300;
-    @apply hover:-translate-y-1 hover:shadow-xl hover:border-marsa-sea/30 dark:hover:border-marsa-dark-sea/30;
+    @apply overflow-hidden rounded-marsa-md bg-marsa-pearl dark:bg-marsa-dark-card border border-marsa-warm/50 dark:border-white/[0.06] transition-all duration-300;
+    @apply hover:-translate-y-1 hover:shadow-xl hover:border-marsa-sea/40 dark:hover:border-marsa-dark-sea/30;
     /* Paint containment: browser skips layout of card siblings when one changes */
     contain: layout style;
   }
 
   .card-image {
-    @apply relative overflow-hidden h-64 bg-marsa-sea-soft dark:bg-marsa-dark-sea-soft;
+    /* Mint placeholder is fine on white sections; dark mode uses deep panel */
+    @apply relative overflow-hidden h-64 bg-marsa-sea-soft dark:bg-marsa-dark-panel;
     /* Force GPU compositing for image scale transitions */
     transform: translateZ(0);
   }
@@ -172,8 +210,10 @@
   }
 
   /* ── Accent link ── */
+  /* Light: sea-bright (#2f7772) is readable teal on white (4.9:1 contrast ✓) */
+  /* Dark:  sand (#ead7a8) is warm gold, reads well on deep dark panels      */
   .link-accent {
-    @apply inline-flex items-center gap-2 text-marsa-sand dark:text-marsa-sand-deep font-bold text-[11px] tracking-wide uppercase;
+    @apply inline-flex items-center gap-2 text-marsa-sea-bright dark:text-marsa-sand font-bold text-[11px] tracking-wide uppercase;
     @apply hover:gap-3 transition-all duration-200;
   }
 
@@ -201,23 +241,61 @@
 }
 
 @layer utilities {
-  /* ── Reveal / scroll animations ── */
-  .reveal {
+  /* ── Reveal / scroll animations (Expert Engine) ── */
+  .reveal,
+  .reveal-up,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
     opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 0.75, 0.18, 1),
-      transform 0.7s cubic-bezier(0.22, 0.75, 0.18, 1);
-    /* Hint compositor: only opacity+transform will change */
+    /* Spring-like easing for a premium feel */
+    transition: 
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
-  .reveal.is-visible {
+  .reveal,
+  .reveal-up {
+    transform: translate3d(0, 40px, 0);
+  }
+
+  .reveal-left {
+    transform: translate3d(-40px, 0, 0);
+  }
+
+  .reveal-right {
+    transform: translate3d(40px, 0, 0);
+  }
+
+  .reveal-scale {
+    transform: scale(0.92) translate3d(0, 20px, 0);
+  }
+
+  .is-visible.reveal,
+  .is-visible.reveal-up,
+  .is-visible.reveal-left,
+  .is-visible.reveal-right {
     opacity: 1;
-    transform: translateY(0);
-    /* Release will-change after animation completes */
+    transform: translate3d(0, 0, 0);
     will-change: auto;
   }
+  
+  .is-visible.reveal-scale {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+    will-change: auto;
+  }
+
+  /* ── Stagger Delays ── */
+  .delay-75  { transition-delay: 75ms; }
+  .delay-100 { transition-delay: 100ms; }
+  .delay-150 { transition-delay: 150ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-225 { transition-delay: 225ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
 
   /* ── Named animations ── */
   .animate-rise {

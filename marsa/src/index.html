@@ -9,7 +9,52 @@
     <meta property="og:title" content="MARSA — Saudi Marine Hospitality" />
     <meta property="og:description" content="Saudi hospitality, delivered at sea." />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0b1f2a" />
+    <meta name="theme-color" content="#071417" />
+
+    <!-- ① Preconnect to Google Fonts — eliminates DNS/TLS latency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- ② Fonts loaded async via media trick — non-render-blocking -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <!-- Fallback for JS-disabled browsers -->
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap" />
+    </noscript>
+
+    <!-- ③ Preload LCP hero image — browser fetches it immediately -->
+    <link rel="preload" as="image" href="/assets/marsa-hero.jpg" fetchpriority="high" />
+
+    <!-- ④ (Removed: Hardcoded Google Fonts URLs rotate, causing 404s. The preconnects above are sufficient) -->
+
+    <!-- ⑤ Inline critical above-the-fold CSS — prevents FOUC before stylesheet loads -->
+    <style>
+      *,*::before,*::after{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{
+        margin:0;
+        background:#f5f2eb;
+        color:#122124;
+        font-family:Manrope,'Noto Sans Arabic',sans-serif;
+        -webkit-font-smoothing:antialiased;
+      }
+      body.dark{background:#0d2224;color:#f2eee4}
+      /* Skeleton navbar so layout doesn't shift */
+      header{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:50;width:100%;max-width:64rem;padding:0 1rem}
+      /* Hero placeholder background while image loads */
+      section:first-of-type{
+        position:relative;min-height:100vh;
+        background:#071417;
+      }
+      /* Prevent invisible text flash */
+      h1,h2,h3{font-weight:700;letter-spacing:-0.04em}
+    </style>
+
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   </head>
   <body>

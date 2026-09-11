@@ -1,0 +1,73 @@
+    <!-- ── Hero — Slider ── -->
+    <section class="relative min-h-screen flex items-end pb-24 md:pb-32 text-marsa-pearl overflow-hidden" aria-labelledby="hero-title">
+      
+      <!-- Slider Backgrounds -->
+      <div class="absolute inset-0 z-0 bg-marsa-deep">
+        <ng-container *ngFor="let slide of slides; let i = index">
+          <div class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-[2000ms] ease-in-out transform"
+               [ngClass]="{
+                 'opacity-100 scale-100 z-10': i === activeSlideIndex,
+                 'opacity-0 scale-105 z-0': i !== activeSlideIndex
+               }"
+               [style.backgroundImage]="'url(' + slide + ')'">
+          </div>
+        </ng-container>
+        <!-- Overlay Gradients -->
+        <div class="absolute inset-0 bg-gradient-to-r from-marsa-deep/90 via-marsa-deep/40 to-marsa-deep/10 z-20 pointer-events-none transition-opacity duration-1000"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/80 via-transparent to-marsa-deep/30 z-20 pointer-events-none transition-opacity duration-1000"></div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="relative z-30 w-full max-w-5xl mx-auto px-6 md:px-8 mb-6 md:mb-12">
+        <p class="eyebrow text-marsa-sand mb-6 reveal">
+          <span class="eyebrow-line"></span>
+          {{ text(copy.hero.eyebrow) }}
+        </p>
+        <h1 id="hero-title" class="text-[clamp(44px,7vw,88px)] font-bold leading-[0.94] -tracking-[0.04em] mb-6 max-w-2xl reveal drop-shadow-md">
+          {{ text(copy.hero.title) }}
+        </h1>
+        <p class="text-base md:text-lg text-marsa-pearl/80 mb-10 max-w-md leading-relaxed reveal drop-shadow-md">
+          {{ text(copy.hero.body) }}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 items-start reveal">
+          <button class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-[12px] tracking-wide rounded-full transition-all hover:scale-105"
+            type="button" (click)="requestService.emit()">
+            {{ text(copy.hero.primary) }}
+            <svg lucideArrowUpRight class="w-3.5 h-3.5" aria-hidden="true"></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom UI Controls -->
+      <div class="absolute bottom-20 md:bottom-24 left-0 w-full flex items-center px-6 md:px-8 max-w-5xl mx-auto left-1/2 -translate-x-1/2 z-40">
+        <!-- Pagination Dots -->
+        <div class="flex items-center gap-2.5">
+          <button *ngFor="let slide of slides; let i = index" 
+            (click)="setSlide(i)"
+            class="h-2.5 rounded-full transition-all duration-500 ease-out shadow-sm"
+            [ngClass]="{
+              'w-8 bg-marsa-sand': i === activeSlideIndex,
+              'w-2.5 bg-white/30 hover:bg-white/60': i !== activeSlideIndex
+            }"
+            [attr.aria-label]="'Go to slide ' + (i + 1)">
+          </button>
+        </div>
+      </div>
+
+      <!-- Curved Bottom Divider -->
+      <div class="absolute bottom-0 left-0 w-full z-40 pointer-events-none" style="height: 90px;">
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" class="w-full h-full fill-marsa-pearl dark:fill-marsa-dark-pearl transition-colors duration-300">
+          <path d="M 0 90 L 1440 90 L 1440 50 L 820 50 C 770 50, 750 0, 720 0 C 690 0, 670 50, 620 50 L 0 50 Z" />
+        </svg>
+        
+        <!-- Mouse Icon Container -->
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 pointer-events-auto text-marsa-deep dark:text-marsa-dark-ink">
+          <a href="#services" class="hover:text-marsa-sea dark:hover:text-marsa-dark-sea transition-colors flex flex-col items-center">
+            <svg lucideMouse class="w-5 h-5 opacity-60 mb-1" strokeWidth="1.5" aria-hidden="true"></svg>
+            <svg lucideArrowDown class="w-3 h-3 opacity-40 animate-bounce-slow" aria-hidden="true"></svg>
+          </a>
+        </div>
+      </div>
+    </section>

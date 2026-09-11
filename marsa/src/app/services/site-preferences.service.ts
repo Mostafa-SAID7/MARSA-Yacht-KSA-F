@@ -30,7 +30,14 @@ export class SitePreferencesService {
     const locale = this.locale();
     document.documentElement.lang = locale;
     document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
-    document.body.dataset['theme'] = this.theme();
+    
+    if (this.theme() === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.body.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
+    }
   }
 
   private readLocale(): Locale {

@@ -5,423 +5,248 @@
   [class.modal-open]="isRequestOpen"
   [attr.dir]="preferences.locale() === 'ar' ? 'rtl' : 'ltr'"
 >
-  <!-- Header / Topbar -->
-  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-6 px-4 md:px-6 w-full max-w-4xl">
-    <!-- Brand Logo -->
-    <a class="flex items-center gap-2 hover:opacity-75 transition-opacity" routerLink="/" aria-label="MARSA home" (click)="closeMenu()">
-      <span class="flex gap-1 opacity-80" aria-hidden="true">
-        <span class="w-1 h-4 bg-marsa-sea-bright dark:bg-marsa-dark-sea-bright rounded-full"></span>
-        <span class="w-1 h-4 bg-marsa-sea-bright dark:bg-marsa-dark-sea-bright rounded-full"></span>
-        <span class="w-1 h-4 bg-marsa-sea-bright dark:bg-marsa-dark-sea-bright rounded-full"></span>
-      </span>
-      <span class="font-bold text-sm tracking-widest hidden sm:inline">MARSA</span>
-      <span class="font-bold text-sm tracking-widest hidden sm:inline opacity-60">مرسى</span>
-    </a>
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
+    <div class="marsa-nav flex items-center gap-4 px-4 md:px-5 h-14 rounded-marsa-pill">
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-8 flex-1 justify-center text-sm" [attr.aria-label]="text(copy.nav.menu)">
-      <a href="#services" class="hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright transition-colors">{{ text(copy.nav.services) }}</a>
-      <a href="#provisioning" class="hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright transition-colors">{{ text(copy.nav.provisioning) }}</a>
-      <a href="#destinations" class="hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright transition-colors">{{ text(copy.nav.destinations) }}</a>
-      <a href="#about" class="hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright transition-colors">{{ text(copy.nav.about) }}</a>
-    </nav>
+      <!-- Brand Logo -->
+      <a class="flex items-center gap-2.5 hover:opacity-75 transition-opacity shrink-0" routerLink="/" aria-label="MARSA home" (click)="closeMenu()">
+        <span class="flex gap-[3px] items-end" aria-hidden="true">
+          <span class="w-[3px] h-3.5 bg-marsa-sand rounded-full"></span>
+          <span class="w-[3px] h-5 bg-marsa-sand rounded-full"></span>
+          <span class="w-[3px] h-3 bg-marsa-sand rounded-full"></span>
+        </span>
+        <span class="font-bold text-sm tracking-widest text-marsa-pearl">MARSA</span>
+        <span class="text-sm text-marsa-pearl opacity-40 px-1">|</span>
+        <span class="font-semibold text-sm text-marsa-pearl opacity-60">مرسى</span>
+      </a>
 
-    <!-- Navigation Actions -->
-    <div class="flex items-center gap-3 md:gap-4 ml-auto">
-      <!-- Theme Toggle Button -->
-      <button class="p-2 hover:bg-marsa-warm dark:hover:bg-marsa-dark-warm rounded-full transition-colors" type="button" (click)="preferences.toggleTheme()" [attr.aria-label]="text(copy.nav.switchTheme)">
-        <svg *ngIf="preferences.theme() === 'light'" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" fill="none"></path></svg>
-        <svg *ngIf="preferences.theme() === 'dark'" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
-      </button>
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 flex-1 justify-center text-xs font-medium" [attr.aria-label]="text(copy.nav.menu)">
+        <a href="#services"      class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.services) }}</a>
+        <a href="#provisioning"  class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.provisioning) }}</a>
+        <a href="#destinations"  class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.destinations) }}</a>
+        <a href="#about"         class="text-marsa-pearl/70 hover:text-marsa-pearl transition-colors tracking-wide">{{ text(copy.nav.about) }}</a>
+      </nav>
 
-      <!-- Locale Toggle -->
-      <button class="hidden sm:flex items-center gap-1 px-2 py-1 text-xs font-medium hover:bg-marsa-warm dark:hover:bg-marsa-dark-warm rounded transition-colors" type="button" (click)="preferences.toggleLocale()">
-        <span [class.font-bold]="preferences.locale() === 'en'" [class.opacity-50]="preferences.locale() !== 'en'">EN</span>
-        <span class="opacity-40">/</span>
-        <span [class.font-bold]="preferences.locale() === 'ar'" [class.opacity-50]="preferences.locale() !== 'ar'">العربية</span>
-      </button>
+      <!-- Actions -->
+      <div class="flex items-center gap-2 md:gap-3 ml-auto shrink-0">
 
-      <!-- Request Button (Desktop) -->
-      <button class="hidden md:inline-flex items-center gap-1 px-4 py-2 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-xs rounded-full transition-all" type="button" (click)="openRequest()">
-        {{ text(copy.nav.request) }} <span aria-hidden="true">↗</span>
-      </button>
+        <!-- Theme toggle -->
+        <button class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors text-marsa-pearl/70 hover:text-marsa-pearl"
+          type="button" (click)="preferences.toggleTheme()" [attr.aria-label]="text(copy.nav.switchTheme)">
+          <svg *ngIf="preferences.theme() === 'light'" lucideSun    class="w-4 h-4" aria-hidden="true"></svg>
+          <svg *ngIf="preferences.theme() === 'dark'"  lucideMoon   class="w-4 h-4" aria-hidden="true"></svg>
+        </button>
 
-      <!-- Mobile Menu Toggle -->
-      <button class="md:hidden flex flex-col gap-1 p-2" type="button" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" [attr.aria-label]="isMenuOpen ? text(copy.nav.close) : text(copy.nav.menu)">
-        <span class="w-5 h-0.5 bg-current transition-all" [class.rotate-45]="isMenuOpen" [class.translate-y-1.5]="isMenuOpen"></span>
-        <span class="w-5 h-0.5 bg-current transition-all" [class.opacity-0]="isMenuOpen"></span>
-      </button>
+        <!-- Locale toggle -->
+        <button class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-medium text-marsa-pearl/70 hover:text-marsa-pearl hover:bg-white/10 rounded-full transition-colors"
+          type="button" (click)="preferences.toggleLocale()">
+          <svg lucideGlobe class="w-3.5 h-3.5" aria-hidden="true"></svg>
+          <span [class.font-bold]="preferences.locale() === 'en'" [class.opacity-50]="preferences.locale() !== 'en'">EN</span>
+          <span class="opacity-40">/</span>
+          <span [class.font-bold]="preferences.locale() === 'ar'" [class.opacity-50]="preferences.locale() !== 'ar'">ع</span>
+        </button>
+
+        <!-- Request CTA (desktop) -->
+        <button class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-[11px] rounded-full transition-all hover:scale-105 tracking-wide"
+          type="button" (click)="openRequest()">
+          {{ text(copy.nav.request) }}
+          <svg lucideArrowUpRight class="w-3.5 h-3.5" aria-hidden="true"></svg>
+        </button>
+
+        <!-- Mobile menu toggle -->
+        <button class="md:hidden flex items-center justify-center w-8 h-8 text-marsa-pearl hover:bg-white/10 rounded-full transition-colors"
+          type="button" (click)="toggleMenu()"
+          [attr.aria-expanded]="isMenuOpen"
+          [attr.aria-label]="isMenuOpen ? text(copy.nav.close) : text(copy.nav.menu)">
+          <svg *ngIf="!isMenuOpen" lucideMenu class="w-5 h-5" aria-hidden="true"></svg>
+          <svg *ngIf="isMenuOpen"  lucideX    class="w-5 h-5" aria-hidden="true"></svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div class="md:hidden fixed inset-0 z-40 bg-marsa-pearl dark:bg-marsa-dark-pearl pt-24 px-4 pb-4 transform transition-transform" [class.translate-x-full]="!isMenuOpen">
-    <div class="space-y-4">
-      <p class="eyebrow text-marsa-muted dark:text-marsa-dark-muted">{{ text(copy.nav.menu) }}</p>
-      <a href="#services" class="block py-3 font-medium hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright" (click)="closeMenu()">{{ text(copy.nav.services) }} <span class="opacity-50">↗</span></a>
-      <a href="#provisioning" class="block py-3 font-medium hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright" (click)="closeMenu()">{{ text(copy.nav.provisioning) }} <span class="opacity-50">↗</span></a>
-      <a href="#destinations" class="block py-3 font-medium hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright" (click)="closeMenu()">{{ text(copy.nav.destinations) }} <span class="opacity-50">↗</span></a>
-      <a href="#about" class="block py-3 font-medium hover:text-marsa-sea-bright dark:hover:text-marsa-dark-sea-bright" (click)="closeMenu()">{{ text(copy.nav.about) }} <span class="opacity-50">↗</span></a>
-      <button class="w-full py-3 px-4 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-sm rounded-full transition-all" type="button" (click)="openRequest()">{{ text(copy.nav.request) }} <span aria-hidden="true">↗</span></button>
+  <!-- ═══════════════════════════════ MOBILE MENU ═══════════════════════════════ -->
+  <div class="md:hidden fixed inset-0 z-40 bg-marsa-deep/95 backdrop-blur-lg pt-24 px-6 pb-6 transform transition-transform duration-300"
+    [class.translate-x-full]="!isMenuOpen">
+    <div class="space-y-1">
+      <p class="eyebrow text-marsa-pearl/50 mb-6">{{ text(copy.nav.menu) }}</p>
+      <a href="#services"     class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
+        {{ text(copy.nav.services) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
+      </a>
+      <a href="#provisioning" class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
+        {{ text(copy.nav.provisioning) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
+      </a>
+      <a href="#destinations" class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
+        {{ text(copy.nav.destinations) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
+      </a>
+      <a href="#about"        class="flex items-center justify-between py-4 text-lg font-semibold text-marsa-pearl border-b border-white/10 hover:text-marsa-sand transition-colors" (click)="closeMenu()">
+        {{ text(copy.nav.about) }} <svg lucideArrowUpRight class="w-5 h-5 opacity-40" aria-hidden="true"></svg>
+      </a>
+      <div class="pt-8">
+        <button class="w-full py-3.5 px-6 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-sm rounded-full transition-all flex items-center justify-center gap-2"
+          type="button" (click)="openRequest()">
+          {{ text(copy.nav.request) }}
+          <svg lucideArrowUpRight class="w-4 h-4" aria-hidden="true"></svg>
+        </button>
+      </div>
     </div>
   </div>
 
-  <main class="pt-20">
-    <!-- Hero Section -->
-    <section class="relative min-h-screen md:min-h-[860px] flex items-center justify-center text-marsa-pearl dark:text-marsa-dark-pearl overflow-hidden" aria-labelledby="hero-title">
-      <!-- Background Image -->
-      <div class="absolute inset-0 z-0 bg-gradient-to-b from-marsa-sea/40 to-marsa-deep/80 dark:from-marsa-dark-sea/40 dark:to-marsa-dark-deep/80">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/assets/marsa-hero.jpg')"></div>
-      </div>
-      
-      <!-- Overlay -->
-      <div class="absolute inset-0 bg-gradient-to-b from-marsa-deep/20 via-marsa-deep/40 to-marsa-deep/80 dark:from-marsa-dark-deep/20 dark:via-marsa-dark-deep/40 dark:to-marsa-dark-deep/80 z-10"></div>
-
-      <!-- Content -->
-      <div class="relative z-20 text-center px-4 md:px-8 max-w-3xl">
-        <p class="eyebrow mb-6 flex items-center justify-center gap-2">
-          <span class="inline-block w-7 h-px bg-marsa-sand dark:bg-marsa-dark-sand"></span>
-          {{ text(copy.hero.eyebrow) }}
-        </p>
-        <h1 id="hero-title" class="text-5xl md:text-7xl font-bold leading-tight mb-6 -tracking-wider">{{ text(copy.hero.title) }}</h1>
-        <p class="text-lg md:text-xl opacity-90 mb-12 leading-relaxed">{{ text(copy.hero.body) }}</p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button class="px-8 py-3 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-sm rounded-full transition-all hover:scale-105" type="button" (click)="openRequest()">{{ text(copy.hero.primary) }} <span aria-hidden="true">↗</span></button>
-          <a class="px-8 py-3 border-2 border-marsa-warm dark:border-marsa-dark-warm text-marsa-pearl dark:text-marsa-dark-pearl hover:border-marsa-pearl dark:hover:border-marsa-dark-pearl font-bold text-sm rounded-full transition-all" href="#services">{{ text(copy.hero.secondary) }} <span aria-hidden="true">↓</span></a>
-        </div>
-      </div>
-
-      <!-- Meta Info -->
-      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 text-xs font-mono opacity-75">
-        <span>21° 32′ N</span>
-        <span class="w-px h-4 bg-current"></span>
-        <span>RED SEA / SAUDI ARABIA</span>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <a class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-xs opacity-60 hover:opacity-100 transition-opacity" href="#services">
-        <span class="inline-block animate-bounce">↓</span>
-        {{ text(copy.hero.scroll) }}
-      </a>
-    </section>
-
-    <!-- Intro Band -->
-    <section class="py-20 md:py-32 bg-marsa-warm dark:bg-marsa-dark-warm text-marsa-deep dark:text-marsa-dark-ink opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both">
-      <div class="max-w-4xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-        <p class="text-5xl md:text-6xl font-bold -tracking-wider">01 <span class="opacity-20">·</span></p>
-        <p class="text-center text-lg leading-relaxed md:col-span-2">{{ text(copy.sections.servicesBody) }}</p>
-        <span class="text-6xl opacity-10 hidden md:block text-right">◌</span>
-      </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="max-w-4xl mx-auto px-4 md:px-8 py-20 md:py-32" id="services" aria-labelledby="services-title">
-      <div class="mb-16 opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both">
-        <div class="mb-8">
-          <p class="eyebrow mb-2">{{ text(copy.sections.servicesEyebrow) }}</p>
-          <h2 id="services-title" class="text-5xl md:text-6xl font-bold -tracking-wider">{{ text(copy.sections.servicesTitle) }}</h2>
-        </div>
-        <p class="text-lg opacity-75 max-w-xl">{{ text(copy.sections.servicesBody) }}</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <article class="group opacity-0 animate-fade overflow-hidden rounded-marsa-md border border-marsa-warm/20 dark:border-marsa-dark-warm/20 hover:border-marsa-sea/50 dark:hover:border-marsa-dark-sea/50 transition-all" 
-          *ngFor="let service of services; let i = index" 
-          [style]="'animation-delay: ' + (300 + i * 100) + 'ms'"
-          style="animation-fill-mode: both">
-          <div class="relative h-64 overflow-hidden bg-gradient-to-br from-marsa-sea/10 to-marsa-deep/10 dark:from-marsa-dark-sea/10 dark:to-marsa-dark-deep/10">
-            <img [src]="service.image" [alt]="text(service.title)" loading="lazy" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/40 to-transparent dark:from-marsa-dark-deep/40"></div>
-            <span class="absolute top-4 right-4 px-3 py-1 bg-marsa-sand/90 text-marsa-deep text-xs font-bold rounded-full">{{ service.eyebrow }}</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">{{ text(service.title) }}</h3>
-            <p class="text-sm opacity-75 mb-4">{{ text(service.description) }}</p>
-            <a href="#provisioning" class="inline-flex items-center gap-2 text-marsa-sea dark:text-marsa-dark-sea font-bold text-xs hover:gap-3 transition-all" [attr.aria-label]="text(service.title)">
-              {{ text(copy.sections.explore) }} <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Provisioning Section -->
-    <section class="bg-marsa-deep dark:bg-marsa-dark-deep text-marsa-pearl dark:text-marsa-dark-pearl py-20 md:py-32" id="provisioning" aria-labelledby="provisioning-title">
-      <div class="max-w-4xl mx-auto px-4 md:px-8">
-        <div class="mb-16 opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both">
-          <div class="flex justify-between items-start gap-8">
-            <div>
-              <p class="eyebrow mb-2">{{ text(copy.sections.provisioningEyebrow) }}</p>
-              <h2 id="provisioning-title" class="text-5xl md:text-6xl font-bold -tracking-wider">{{ text(copy.sections.provisioningTitle) }}</h2>
-            </div>
-            <span class="text-6xl md:text-8xl font-bold opacity-10">02</span>
-          </div>
-        </div>
-
-        <!-- Steps Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          <div class="opacity-0 animate-fade" *ngFor="let step of steps; let i = index" [style]="'animation-delay: ' + (300 + i * 100) + 'ms'" style="animation-fill-mode: both">
-            <div class="flex flex-col gap-4">
-              <span class="text-4xl font-bold opacity-30">0{{ i + 1 }}</span>
-              <div class="h-px bg-marsa-sand/30 dark:bg-marsa-dark-sand/30"></div>
-              <h3 class="font-bold text-sm leading-relaxed">{{ text(step) }}</h3>
-            </div>
-          </div>
-        </div>
-
-        <!-- Detail Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 opacity-0 animate-fade" style="animation-delay: 600ms; animation-fill-mode: both">
-          <div class="relative h-64 md:h-80 rounded-marsa-md overflow-hidden">
-            <img src="/assets/marsa-deck.jpg" alt="An arranged yacht deck ready for guests" loading="lazy" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/40 to-transparent"></div>
-          </div>
-          <div class="flex flex-col justify-center">
-            <p class="eyebrow mb-4">{{ text(copy.sections.productsEyebrow) }}</p>
-            <h3 class="text-3xl font-bold mb-4 -tracking-wider">Considered from the first crate to the last glass.</h3>
-            <p class="opacity-80 mb-6 leading-relaxed">Our team works quietly behind the scenes so the only thing you notice is how ready everything feels.</p>
-            <button class="inline-flex items-center gap-2 text-marsa-sand font-bold text-sm hover:gap-3 transition-all" type="button" (click)="openRequest()">
-              {{ text(copy.sections.request) }} <span>↗</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Products/Collection Section -->
-    <section class="max-w-4xl mx-auto px-4 md:px-8 py-20 md:py-32 opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both" aria-labelledby="products-title">
-      <div class="mb-16">
-        <div class="mb-8">
-          <p class="eyebrow mb-2">{{ text(copy.sections.productsEyebrow) }}</p>
-          <h2 id="products-title" class="text-5xl md:text-6xl font-bold -tracking-wider">{{ text(copy.sections.productsTitle) }}</h2>
-        </div>
-        <p class="text-lg opacity-75 max-w-xl">{{ text(copy.sections.productsBody) }}</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        <article class="group opacity-0 animate-fade overflow-hidden rounded-marsa-md border border-marsa-warm/20 dark:border-marsa-dark-warm/20 hover:border-marsa-sea/50 dark:hover:border-marsa-dark-sea/50 transition-all" 
-          *ngFor="let product of products; let i = index"
-          [style]="'animation-delay: ' + (300 + i * 100) + 'ms'"
-          style="animation-fill-mode: both">
-          <div class="relative h-56 overflow-hidden bg-gradient-to-br from-marsa-sea/10 to-marsa-deep/10 dark:from-marsa-dark-sea/10 dark:to-marsa-dark-deep/10">
-            <img [src]="product.image" [alt]="text(product.name)" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform" />
-            <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/40 to-transparent dark:from-marsa-dark-deep/40"></div>
-            <span class="absolute top-4 left-4 px-2 py-1 bg-marsa-muted/80 text-marsa-pearl text-xs font-bold rounded-full">{{ text(product.category) }}</span>
-            <button class="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold transition-all" type="button" (click)="openRequest()" [attr.aria-label]="text(copy.sections.request)">+</button>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold mb-1">{{ text(product.name) }}</h3>
-            <p class="text-sm opacity-60 mb-3">{{ text(product.description) }}</p>
-            <span class="text-xs font-bold opacity-75">{{ product.price }}</span>
-          </div>
-        </article>
-      </div>
-
-      <button class="inline-flex items-center gap-2 px-6 py-3 border-2 border-marsa-warm dark:border-marsa-dark-warm hover:border-marsa-sea dark:hover:border-marsa-dark-sea text-marsa-ink dark:text-marsa-dark-ink font-bold text-sm rounded-full transition-all" type="button" (click)="openRequest()">
-        {{ text(copy.sections.viewCollection) }} <span>↗</span>
-      </button>
-    </section>
-
-    <!-- Destinations Section -->
-    <section class="bg-marsa-deep dark:bg-marsa-dark-deep text-marsa-pearl dark:text-marsa-dark-pearl py-20 md:py-32" id="destinations" aria-labelledby="destinations-title">
-      <div class="max-w-4xl mx-auto px-4 md:px-8">
-        <div class="mb-16 opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both">
-          <div class="flex justify-between items-start gap-8">
-            <div>
-              <p class="eyebrow mb-2">{{ text(copy.sections.destinationsEyebrow) }}</p>
-              <h2 id="destinations-title" class="text-5xl md:text-6xl font-bold -tracking-wider">{{ text(copy.sections.destinationsTitle) }}</h2>
-            </div>
-          </div>
-          <p class="text-lg opacity-75 max-w-xl mt-6">{{ text(copy.sections.destinationsBody) }}</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="group relative h-72 rounded-marsa-md overflow-hidden opacity-0 animate-fade cursor-pointer" 
-            *ngFor="let destination of destinations; let i = index"
-            [style]="'animation-delay: ' + (300 + i * 100) + 'ms'"
-            style="animation-fill-mode: both">
-            <img [src]="destination.image" [alt]="text(destination.name)" loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform" />
-            <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/80 via-marsa-deep/40 to-transparent group-hover:from-marsa-deep/90 transition-all"></div>
-            <div class="absolute inset-0 p-6 flex flex-col justify-end">
-              <span class="text-xs font-mono opacity-60 mb-2">{{ text(destination.detail) }}</span>
-              <h3 class="text-2xl font-bold mb-2">{{ text(destination.name) }}</h3>
-              <p class="text-sm opacity-80 mb-4 leading-relaxed">{{ text(destination.description) }}</p>
-              <a href="#contact" class="inline-flex items-center gap-2 text-marsa-sand font-bold text-xs hover:gap-3 transition-all">
-                {{ text(copy.sections.explore) }} <span>↗</span>
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Marina/About Section -->
-    <section class="max-w-4xl mx-auto px-4 md:px-8 py-20 md:py-32 opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both" id="about" aria-labelledby="marina-title">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div class="relative h-72 md:h-96 rounded-marsa-md overflow-hidden order-2 md:order-1">
-          <img src="/assets/marsa-jeddah.jpg" alt="Jeddah marina at dusk" loading="lazy" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-marsa-deep/40 to-transparent"></div>
-          <span class="absolute bottom-4 left-4 px-3 py-1 bg-marsa-ink/80 text-marsa-pearl text-xs font-mono">JEDDAH / 21° 32′ N</span>
-        </div>
-        <div class="order-1 md:order-2">
-          <p class="eyebrow mb-4">{{ text(copy.sections.marinaEyebrow) }}</p>
-          <h2 id="marina-title" class="text-4xl md:text-5xl font-bold mb-6 -tracking-wider">{{ text(copy.sections.marinaTitle) }}</h2>
-          <p class="opacity-75 mb-6 leading-relaxed">{{ text(copy.sections.marinaBody) }}</p>
-          <div class="grid grid-cols-2 gap-4 mb-8">
-            <span class="text-sm font-medium opacity-80">Marina delivery</span>
-            <span class="text-sm font-medium opacity-80">Yacht support</span>
-            <span class="text-sm font-medium opacity-80">Crew assistance</span>
-            <span class="text-sm font-medium opacity-80">Special requests</span>
-          </div>
-          <button class="inline-flex items-center gap-2 text-marsa-sea dark:text-marsa-dark-sea font-bold text-sm hover:gap-3 transition-all" type="button" (click)="openRequest()">
-            {{ text(copy.sections.concierge) }} <span>↗</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hospitality Section -->
-    <section class="relative min-h-96 md:min-h-screen flex items-center justify-center text-marsa-pearl dark:text-marsa-dark-pearl overflow-hidden py-20">
-      <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('/assets/marsa-hospitality.jpg')"></div>
-      <div class="absolute inset-0 bg-gradient-to-b from-marsa-deep/30 via-marsa-deep/50 to-marsa-deep/80 dark:from-marsa-dark-deep/30 dark:via-marsa-dark-deep/50 dark:to-marsa-dark-deep/80 z-10"></div>
-      <div class="relative z-20 text-center px-4 md:px-8 max-w-3xl opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both">
-        <p class="eyebrow mb-6">{{ text(copy.sections.hospitalityEyebrow) }}</p>
-        <h2 class="text-5xl md:text-7xl font-bold mb-8 -tracking-wider">{{ text(copy.sections.hospitalityTitle) }}</h2>
-        <p class="text-lg md:text-xl opacity-90 mb-12 leading-relaxed">{{ text(copy.sections.hospitalityBody) }}</p>
-        <span class="text-8xl font-bold opacity-20">مَرْسَى</span>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="max-w-2xl mx-auto px-4 md:px-8 py-20 md:py-32 text-center opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both" aria-labelledby="testimonial-title">
-      <div class="text-6xl font-bold opacity-20 mb-4">"</div>
-      <p class="eyebrow mb-4 justify-center">{{ text(copy.sections.testimonialsEyebrow) }}</p>
-      <h2 id="testimonial-title" class="text-4xl md:text-5xl font-bold mb-12 -tracking-wider">{{ text(copy.sections.testimonialsTitle) }}</h2>
-      <blockquote class="text-xl md:text-2xl leading-relaxed mb-6">
-        {{ preferences.locale() === 'ar' ? 'جعلت مرسى عملية التموين سهلة وسلسة من لحظة الوصول حتى المغادرة.' : 'MARSA made provisioning effortless from arrival to departure.' }}
-      </blockquote>
-      <cite class="text-sm opacity-60 not-italic">
-        {{ preferences.locale() === 'ar' ? 'الكابتن سامي · جدة' : 'Captain Sami · Jeddah' }}
-      </cite>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="bg-marsa-sand dark:bg-marsa-dark-sand text-marsa-deep dark:text-marsa-dark-ink py-20 md:py-32" id="contact" aria-labelledby="cta-title">
-      <div class="max-w-3xl mx-auto px-4 md:px-8 text-center opacity-0 animate-fade" style="animation-delay: 300ms; animation-fill-mode: both">
-        <p class="eyebrow mb-4">{{ text(copy.sections.hospitalityEyebrow) }}</p>
-        <h2 id="cta-title" class="text-5xl md:text-6xl font-bold mb-6 -tracking-wider">{{ text(copy.sections.ctaTitle) }}</h2>
-        <p class="text-lg opacity-75 mb-12">{{ text(copy.sections.ctaBody) }}</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button class="px-8 py-3 bg-marsa-deep hover:bg-marsa-deep/80 text-marsa-pearl dark:text-marsa-dark-pearl font-bold text-sm rounded-full transition-all hover:scale-105" type="button" (click)="openRequest()">{{ text(copy.sections.request) }} <span aria-hidden="true">↗</span></button>
-          <button class="px-8 py-3 border-2 border-marsa-deep dark:border-marsa-dark-ink hover:bg-marsa-deep/10 dark:hover:bg-marsa-dark-ink/10 font-bold text-sm rounded-full transition-all" type="button" (click)="openRequest()">{{ text(copy.sections.concierge) }} <span aria-hidden="true">↗</span></button>
-        </div>
-      </div>
-    </section>
+  <!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+  <main>
+    <app-hero (requestService)="openRequest()"></app-hero>
+    <app-intro></app-intro>
+    <app-services></app-services>
+    <app-provisioning (requestService)="openRequest()"></app-provisioning>
+    <app-products (requestService)="openRequest()"></app-products>
+    <app-destinations></app-destinations>
+    <app-about (requestService)="openRequest()"></app-about>
+    <app-testimonials></app-testimonials>
+    <app-cta (requestService)="openRequest()"></app-cta>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-marsa-ink dark:bg-marsa-dark-ink text-marsa-pearl dark:text-marsa-dark-pearl border-t border-marsa-warm/20 dark:border-marsa-dark-warm/20">
-    <div class="max-w-4xl mx-auto px-4 md:px-8 py-16">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-        <!-- Brand Column -->
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="bg-marsa-ink dark:bg-marsa-dark-deep text-marsa-pearl border-t border-white/[0.08]">
+    <div class="max-w-5xl mx-auto px-6 md:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
+
+        <!-- Brand -->
         <div>
-          <a class="flex items-center gap-2 mb-4" routerLink="/">
-            <span class="flex gap-1 opacity-80">
-              <span class="w-1 h-3 bg-marsa-sand rounded-full"></span>
-              <span class="w-1 h-3 bg-marsa-sand rounded-full"></span>
-              <span class="w-1 h-3 bg-marsa-sand rounded-full"></span>
+          <a class="flex items-center gap-2.5 mb-5" routerLink="/">
+            <span class="flex gap-[3px] items-end" aria-hidden="true">
+              <span class="w-[3px] h-3 bg-marsa-sand rounded-full"></span>
+              <span class="w-[3px] h-4 bg-marsa-sand rounded-full"></span>
+              <span class="w-[3px] h-2.5 bg-marsa-sand rounded-full"></span>
             </span>
-            <span class="font-bold text-sm">MARSA</span>
-            <span class="font-bold text-sm opacity-60">مرسى</span>
+            <span class="font-bold text-sm tracking-widest">MARSA</span>
+            <span class="text-sm font-semibold opacity-50">مرسى</span>
           </a>
-          <p class="text-sm opacity-75 mb-4">{{ text(copy.footer.descriptor) }}</p>
-          <span class="text-xs font-mono opacity-60">SEA / SERVICE / SAUDI</span>
+          <p class="text-sm opacity-60 mb-5 leading-relaxed">{{ text(copy.footer.descriptor) }}</p>
+          <span class="text-[9px] font-mono opacity-40 tracking-[0.18em] uppercase">Sea / Service / Saudi</span>
         </div>
 
-        <!-- Navigation Column -->
+        <!-- Nav -->
         <div>
           <p class="eyebrow mb-6">{{ text(copy.footer.navigation) }}</p>
-          <nav class="flex flex-col gap-3">
-            <a href="#services" class="text-sm hover:text-marsa-sand transition-colors">{{ text(copy.nav.services) }}</a>
-            <a href="#provisioning" class="text-sm hover:text-marsa-sand transition-colors">{{ text(copy.nav.provisioning) }}</a>
-            <a href="#destinations" class="text-sm hover:text-marsa-sand transition-colors">{{ text(copy.nav.destinations) }}</a>
-            <a href="#about" class="text-sm hover:text-marsa-sand transition-colors">{{ text(copy.nav.about) }}</a>
+          <nav class="flex flex-col gap-3.5">
+            <a href="#services"     class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.services) }}</a>
+            <a href="#provisioning" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.provisioning) }}</a>
+            <a href="#destinations" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.destinations) }}</a>
+            <a href="#about"        class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(copy.nav.about) }}</a>
           </nav>
         </div>
 
-        <!-- Services Column -->
+        <!-- Services -->
         <div>
           <p class="eyebrow mb-6">{{ text(copy.footer.services) }}</p>
-          <nav class="flex flex-col gap-3">
-            <a href="#services" class="text-sm hover:text-marsa-sand transition-colors">{{ text(services[0].title) }}</a>
-            <a href="#services" class="text-sm hover:text-marsa-sand transition-colors">{{ text(services[1].title) }}</a>
-            <a href="#services" class="text-sm hover:text-marsa-sand transition-colors">{{ text(services[2].title) }}</a>
-            <a href="#services" class="text-sm hover:text-marsa-sand transition-colors">{{ text(services[3].title) }}</a>
+          <nav class="flex flex-col gap-3.5">
+            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[0].title) }}</a>
+            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[1].title) }}</a>
+            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[2].title) }}</a>
+            <a href="#services" class="text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">{{ text(services[3].title) }}</a>
           </nav>
         </div>
 
-        <!-- Contact Column -->
+        <!-- Contact -->
         <div>
           <p class="eyebrow mb-6">{{ text(copy.footer.contact) }}</p>
-          <div class="space-y-3">
-            <span class="block text-sm opacity-75">{{ text(copy.footer.location) }}</span>
-            <a href="mailto:concierge@marsa.sa" class="block text-sm hover:text-marsa-sand transition-colors">{{ text(copy.footer.email) }}</a>
-            <a href="tel:+966120000000" class="block text-sm hover:text-marsa-sand transition-colors">{{ text(copy.footer.phone) }}</a>
-            <div class="flex gap-4 pt-2">
-              <a href="#contact" class="text-xs font-bold hover:text-marsa-sand transition-colors" aria-label="Instagram">IG</a>
-              <a href="#contact" class="text-xs font-bold hover:text-marsa-sand transition-colors" aria-label="LinkedIn">LI</a>
+          <div class="space-y-3.5">
+            <div class="flex items-center gap-2.5 text-sm opacity-60">
+              <svg lucideMapPin class="w-3.5 h-3.5 shrink-0" aria-hidden="true"></svg>
+              {{ text(copy.footer.location) }}
+            </div>
+            <a href="mailto:concierge@marsa.sa" class="flex items-center gap-2.5 text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">
+              <svg lucideMail class="w-3.5 h-3.5 shrink-0" aria-hidden="true"></svg>
+              {{ text(copy.footer.email) }}
+            </a>
+            <a href="tel:+966120000000" class="flex items-center gap-2.5 text-sm opacity-60 hover:opacity-100 hover:text-marsa-sand transition-all">
+              <svg lucidePhone class="w-3.5 h-3.5 shrink-0" aria-hidden="true"></svg>
+              {{ text(copy.footer.phone) }}
+            </a>
+            <div class="flex gap-3 pt-1">
+              <a href="#contact"
+                class="flex items-center justify-center w-8 h-8 rounded-full border border-white/[0.12] hover:border-marsa-sand hover:text-marsa-sand opacity-60 hover:opacity-100 transition-all"
+                aria-label="Social media">
+                <svg lucideShare2 class="w-3.5 h-3.5" aria-hidden="true"></svg>
+              </a>
+              <a href="#contact"
+                class="flex items-center justify-center w-8 h-8 rounded-full border border-white/[0.12] hover:border-marsa-sand hover:text-marsa-sand opacity-60 hover:opacity-100 transition-all"
+                aria-label="External link">
+                <svg lucideExternalLink class="w-3.5 h-3.5" aria-hidden="true"></svg>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="border-t border-marsa-warm/20 dark:border-marsa-dark-warm/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs opacity-60">
+      <!-- Bottom bar -->
+      <div class="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono opacity-40 tracking-widest">
         <span>{{ text(copy.footer.rights) }}</span>
-        <span>EN <span class="opacity-40">/</span> العربية</span>
-        <span>Built for the Red Sea</span>
+        <span class="uppercase">EN / العربية</span>
+        <span class="uppercase">Built for the Red Sea</span>
       </div>
     </div>
   </footer>
 
-  <!-- Request Modal -->
-  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm" *ngIf="isRequestOpen" (click)="closeRequest()">
-    <section class="bg-marsa-pearl dark:bg-marsa-dark-pearl rounded-marsa-lg w-full max-w-md max-h-96 overflow-y-auto relative" role="dialog" aria-modal="true" aria-labelledby="request-title" (click)="$event.stopPropagation()">
-      <button class="absolute top-4 right-4 text-3xl opacity-50 hover:opacity-100 transition-opacity" type="button" (click)="closeRequest()" [attr.aria-label]="text(copy.nav.close)">×</button>
-      
+  <!-- ═══════════════════════════════ REQUEST MODAL ═══════════════════════════════ -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-marsa-deep/60 backdrop-blur-md"
+    *ngIf="isRequestOpen" (click)="closeRequest()">
+    <section class="bg-marsa-pearl dark:bg-marsa-dark-deep rounded-marsa-lg w-full max-w-md shadow-2xl relative overflow-hidden"
+      role="dialog" aria-modal="true" aria-labelledby="request-title" (click)="$event.stopPropagation()">
+
+      <button class="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full hover:bg-marsa-warm dark:hover:bg-white/10 text-marsa-muted hover:text-marsa-ink dark:hover:text-marsa-pearl transition-all"
+        type="button" (click)="closeRequest()" [attr.aria-label]="text(copy.nav.close)">
+        <svg lucideX class="w-4 h-4" aria-hidden="true"></svg>
+      </button>
+
       <ng-container *ngIf="!requestSent; else thankYou">
         <div class="p-8">
-          <p class="eyebrow mb-2">{{ text(copy.sections.provisioningEyebrow) }}</p>
-          <h2 id="request-title" class="text-2xl font-bold mb-4 -tracking-wider">{{ text(copy.sections.request) }}</h2>
-          <p class="text-sm opacity-75 mb-6">{{ text(copy.sections.ctaBody) }}</p>
+          <p class="eyebrow mb-3"><span class="eyebrow-line"></span>{{ text(copy.sections.provisioningEyebrow) }}</p>
+          <h2 id="request-title" class="text-2xl font-bold mb-3 -tracking-[0.03em]">{{ text(copy.sections.request) }}</h2>
+          <p class="text-sm opacity-60 mb-7 leading-relaxed">{{ text(copy.sections.ctaBody) }}</p>
 
-          <form (ngSubmit)="submitRequest()" class="space-y-4">
+          <form (ngSubmit)="submitRequest()" class="space-y-5">
             <div>
-              <label class="block text-xs font-bold mb-2">{{ preferences.locale() === 'ar' ? 'الاسم' : 'Name' }}</label>
-              <input name="name" [(ngModel)]="requestName" required class="w-full px-4 py-2 border border-marsa-warm/30 dark:border-marsa-dark-warm/30 rounded-marsa-sm bg-transparent focus:border-marsa-sea dark:focus:border-marsa-dark-sea transition-colors" />
+              <label class="block text-[10px] font-bold mb-2 opacity-70 tracking-widest uppercase">{{ preferences.locale() === 'ar' ? 'الاسم' : 'Name' }}</label>
+              <input name="name" [(ngModel)]="requestName" required
+                class="w-full px-4 py-3 border border-marsa-warm dark:border-white/10 rounded-marsa-sm bg-transparent focus:border-marsa-sea dark:focus:border-marsa-dark-sea transition-colors text-sm outline-none" />
             </div>
             <div>
-              <label class="block text-xs font-bold mb-2">{{ preferences.locale() === 'ar' ? 'البريد الإلكتروني' : 'Email' }}</label>
-              <input type="email" name="email" [(ngModel)]="requestEmail" required class="w-full px-4 py-2 border border-marsa-warm/30 dark:border-marsa-dark-warm/30 rounded-marsa-sm bg-transparent focus:border-marsa-sea dark:focus:border-marsa-dark-sea transition-colors" />
+              <label class="block text-[10px] font-bold mb-2 opacity-70 tracking-widest uppercase">{{ preferences.locale() === 'ar' ? 'البريد الإلكتروني' : 'Email' }}</label>
+              <input type="email" name="email" [(ngModel)]="requestEmail" required
+                class="w-full px-4 py-3 border border-marsa-warm dark:border-white/10 rounded-marsa-sm bg-transparent focus:border-marsa-sea dark:focus:border-marsa-dark-sea transition-colors text-sm outline-none" />
             </div>
             <div>
-              <label class="block text-xs font-bold mb-2">{{ preferences.locale() === 'ar' ? 'كيف نساعدك؟' : 'How can we help?' }}</label>
-              <textarea name="notes" rows="3" [(ngModel)]="requestNotes" class="w-full px-4 py-2 border border-marsa-warm/30 dark:border-marsa-dark-warm/30 rounded-marsa-sm bg-transparent focus:border-marsa-sea dark:focus:border-marsa-dark-sea transition-colors resize-none"></textarea>
+              <label class="block text-[10px] font-bold mb-2 opacity-70 tracking-widest uppercase">{{ preferences.locale() === 'ar' ? 'كيف نساعدك؟' : 'How can we help?' }}</label>
+              <textarea name="notes" rows="3" [(ngModel)]="requestNotes"
+                class="w-full px-4 py-3 border border-marsa-warm dark:border-white/10 rounded-marsa-sm bg-transparent focus:border-marsa-sea dark:focus:border-marsa-dark-sea transition-colors resize-none text-sm outline-none"></textarea>
             </div>
-            <button class="w-full py-3 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-sm rounded-full transition-all" type="submit">{{ text(copy.sections.request) }} <span aria-hidden="true">↗</span></button>
+            <button class="w-full py-3.5 bg-marsa-sand hover:bg-marsa-sand-deep text-marsa-deep font-bold text-[12px] tracking-wide rounded-full transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+              type="submit">
+              {{ text(copy.sections.request) }}
+              <svg lucideArrowUpRight class="w-3.5 h-3.5" aria-hidden="true"></svg>
+            </button>
           </form>
         </div>
       </ng-container>
 
       <ng-template #thankYou>
         <div class="p-8 text-center">
-          <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-marsa-sea/20 dark:bg-marsa-dark-sea/20 text-4xl font-bold mb-4">✓</span>
-          <p class="eyebrow mb-2 justify-center">{{ preferences.locale() === 'ar' ? 'تم الاستلام' : 'Request received' }}</p>
-          <h2 class="text-2xl font-bold mb-3 -tracking-wider">{{ preferences.locale() === 'ar' ? 'سنعود إليك قريباً.' : 'We'll be in touch shortly.' }}</h2>
-          <p class="text-sm opacity-75 mb-6">{{ preferences.locale() === 'ar' ? 'سيتواصل معك فريق الكونسيرج في أقرب وقت.' : 'Our concierge team will follow up with the right details for your voyage.' }}</p>
-          <button class="inline-flex items-center gap-2 px-6 py-2 border-2 border-marsa-warm dark:border-marsa-dark-warm hover:border-marsa-sea dark:hover:border-marsa-dark-sea font-bold text-sm rounded-full transition-all" type="button" (click)="closeRequest()">{{ preferences.locale() === 'ar' ? 'إغلاق' : 'Close' }}</button>
+          <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-marsa-sea/15 text-marsa-sea dark:text-marsa-dark-sea mb-5">
+            <svg lucideCheck class="w-7 h-7" aria-hidden="true"></svg>
+          </span>
+          <p class="eyebrow mb-3 justify-center"><span class="eyebrow-line"></span>{{ preferences.locale() === 'ar' ? 'تم الاستلام' : 'Request received' }}</p>
+          <h2 class="text-2xl font-bold mb-3 -tracking-[0.03em]">{{ preferences.locale() === 'ar' ? 'سنعود إليك قريباً.' : "We'll be in touch shortly." }}</h2>
+          <p class="text-sm opacity-60 mb-8 leading-relaxed">{{ preferences.locale() === 'ar' ? 'سيتواصل معك فريق الكونسيرج في أقرب وقت.' : 'Our concierge team will follow up with the right details for your voyage.' }}</p>
+          <button class="inline-flex items-center gap-2 px-6 py-3 border border-marsa-warm dark:border-white/[0.12] hover:border-marsa-sea dark:hover:border-marsa-dark-sea font-bold text-[12px] tracking-wide rounded-full transition-all"
+            type="button" (click)="closeRequest()">
+            {{ preferences.locale() === 'ar' ? 'إغلاق' : 'Close' }}
+          </button>
         </div>
       </ng-template>
     </section>
   </div>
+
 </div>

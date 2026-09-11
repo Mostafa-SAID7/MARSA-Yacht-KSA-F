@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap');
+/* Fonts are loaded non-render-blocking via <link> in index.html — do NOT add @import here */
 
 @tailwind base;
 @tailwind components;
@@ -13,32 +13,54 @@
     @apply scroll-smooth;
   }
 
+  /* ── Scrollbar — light mode ── */
   html,
   body {
     scrollbar-width: thin;
-    scrollbar-color: rgb(47, 119, 114) rgb(232, 227, 216);
+    scrollbar-color: #2f7772 #e8e3d8;
   }
 
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    @apply w-2.5 h-2.5;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
 
-  html::-webkit-scrollbar-track,
-  body::-webkit-scrollbar-track {
-    @apply bg-marsa-warm rounded-2xl;
+  ::-webkit-scrollbar-track {
+    background: #e8e3d8;
+    border-radius: 999px;
   }
 
-  html::-webkit-scrollbar-thumb,
-  body::-webkit-scrollbar-thumb {
-    @apply bg-marsa-sea-bright rounded-2xl;
+  ::-webkit-scrollbar-thumb {
+    background: #2f7772;
+    border-radius: 999px;
   }
 
-  html::-webkit-scrollbar-thumb:hover,
-  body::-webkit-scrollbar-thumb:hover,
-  html::-webkit-scrollbar-thumb:active,
-  body::-webkit-scrollbar-thumb:active {
-    @apply bg-marsa-sea;
+  ::-webkit-scrollbar-thumb:hover,
+  ::-webkit-scrollbar-thumb:active {
+    background: #17494b;
+  }
+
+  /* ── Scrollbar — dark mode ── */
+  html.dark,
+  body.dark {
+    scrollbar-color: #a8d4c7 #112b2d;
+  }
+
+  html.dark::-webkit-scrollbar-track,
+  .dark ::-webkit-scrollbar-track {
+    background: #112b2d;
+  }
+
+  html.dark::-webkit-scrollbar-thumb,
+  .dark ::-webkit-scrollbar-thumb {
+    background: #a8d4c7;
+  }
+
+  html.dark::-webkit-scrollbar-thumb:hover,
+  html.dark::-webkit-scrollbar-thumb:active,
+  .dark ::-webkit-scrollbar-thumb:hover,
+  .dark ::-webkit-scrollbar-thumb:active {
+    background: #83bcb1;
   }
 
   body {
@@ -47,30 +69,16 @@
 
   body.dark {
     @apply bg-marsa-dark-pearl text-marsa-dark-ink;
-    scrollbar-color: rgb(168, 212, 199) rgb(17, 43, 45);
-  }
-
-  body.dark::-webkit-scrollbar-track {
-    @apply bg-marsa-dark-warm;
-  }
-
-  body.dark::-webkit-scrollbar-thumb {
-    @apply bg-marsa-dark-sea-bright;
-  }
-
-  body.dark::-webkit-scrollbar-thumb:hover,
-  body.dark::-webkit-scrollbar-thumb:active {
-    @apply bg-marsa-dark-sea;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-medium -tracking-[0.055em];
+    @apply font-bold -tracking-[0.04em];
   }
 
   h2 {
-    @apply text-[clamp(38px,5vw,72px)] leading-[0.98];
+    @apply text-[clamp(36px,5vw,68px)] leading-[0.96];
   }
 
   a {
@@ -85,109 +93,157 @@
   a:focus-visible,
   input:focus-visible,
   textarea:focus-visible {
-    @apply outline-2 outline-offset-1 outline-marsa-sand;
+    @apply outline-2 outline-offset-2 outline-marsa-sand;
   }
 
   img {
     @apply block max-w-full;
   }
+
+  /* Lucide icon default sizing */
+  lucide-icon {
+    @apply inline-flex shrink-0;
+  }
 }
 
 @layer components {
+  /* ── Eyebrow label ── */
   .eyebrow {
-    @apply flex items-center gap-2.5 m-0 text-marsa-muted font-mono text-[10px] font-medium leading-[1.2] uppercase tracking-[0.16em];
+    @apply flex items-center gap-2.5 m-0 text-marsa-muted font-mono text-[10px] font-medium leading-[1.2] uppercase tracking-[0.18em];
+  }
+
+  .dark .eyebrow {
+    @apply text-marsa-dark-muted;
   }
 
   .eyebrow-line {
-    @apply inline-block w-7 h-px bg-current;
+    @apply inline-block w-7 h-px bg-current opacity-40;
   }
 
+  /* ── Floating glassmorphism navbar ── */
+  .marsa-nav {
+    background: rgba(7, 20, 23, 0.82);
+    backdrop-filter: blur(20px) saturate(1.6);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.28),
+      0 1px 0 rgba(255, 255, 255, 0.05) inset;
+  }
+
+  /* ── Buttons ── */
   .btn {
-    @apply inline-flex items-center justify-center gap-4 min-h-12 px-6 rounded-full font-bold text-[11px] transition-all;
+    @apply inline-flex items-center justify-center gap-2.5 min-h-12 px-6 rounded-full font-bold text-[12px] tracking-wide transition-all;
   }
 
   .btn-primary {
-    @apply bg-marsa-sand text-marsa-deep hover:scale-105;
+    @apply bg-marsa-sand text-marsa-deep hover:bg-marsa-sand-deep hover:scale-105;
   }
 
   .btn-light {
-    @apply bg-marsa-pearl text-marsa-deep hover:scale-105;
+    @apply bg-marsa-pearl text-marsa-deep hover:bg-marsa-sand hover:scale-105;
   }
 
   .btn-outline {
-    @apply border border-marsa-warm text-marsa-pearl bg-transparent hover:border-marsa-pearl;
+    @apply border border-marsa-pearl/30 text-marsa-pearl bg-transparent hover:border-marsa-pearl hover:bg-white/5;
   }
 
+  /* ── Cards ── */
   .card {
-    @apply overflow-hidden rounded-marsa-md bg-white border border-marsa-warm/14 transition-all hover:scale-95 hover:shadow-lg;
+    @apply overflow-hidden rounded-marsa-md bg-marsa-pearl dark:bg-marsa-dark-deep border border-marsa-warm/30 dark:border-white/[0.08] transition-all duration-300;
+    @apply hover:-translate-y-1 hover:shadow-xl hover:border-marsa-sea/30 dark:hover:border-marsa-dark-sea/30;
+    /* Paint containment: browser skips layout of card siblings when one changes */
+    contain: layout style;
   }
 
   .card-image {
-    @apply relative overflow-hidden h-64 bg-marsa-sea-soft;
+    @apply relative overflow-hidden h-64 bg-marsa-sea-soft dark:bg-marsa-dark-sea-soft;
+    /* Force GPU compositing for image scale transitions */
+    transform: translateZ(0);
   }
 
   .card-image::after {
-    @apply absolute inset-0 bg-gradient-to-b from-black/24 to-transparent pointer-events-none content-[''];
+    @apply absolute inset-0 bg-gradient-to-b from-black/20 to-transparent pointer-events-none;
+    content: '';
   }
 
   .card-content {
     @apply p-6;
   }
 
+  /* ── Accent link ── */
   .link-accent {
-    @apply inline-flex items-center gap-3.5 text-marsa-sea font-bold text-[11px];
+    @apply inline-flex items-center gap-2 text-marsa-sand dark:text-marsa-sand-deep font-bold text-[11px] tracking-wide uppercase;
+    @apply hover:gap-3 transition-all duration-200;
   }
 
+  /* ── Section wrapper ── */
   .section-wrap {
-    @apply w-full max-w-[1280px] mx-auto px-6;
+    @apply w-full max-w-5xl mx-auto px-6 md:px-8;
   }
 
   .section {
-    @apply py-[140px];
+    @apply py-24 md:py-36;
   }
 
+  /* ── Grid helpers ── */
   .grid-2 {
-    @apply grid grid-cols-2 gap-4;
+    @apply grid grid-cols-2 gap-5;
   }
 
   .grid-3 {
-    @apply grid grid-cols-3 gap-4;
+    @apply grid grid-cols-3 gap-5;
   }
 
   .grid-4 {
-    @apply grid grid-cols-4 gap-4;
+    @apply grid grid-cols-4 gap-5;
   }
 }
 
 @layer utilities {
-  .tracking-wider-marsa {
-    @apply tracking-[0.02em];
+  /* ── Reveal / scroll animations ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 0.75, 0.18, 1),
+      transform 0.7s cubic-bezier(0.22, 0.75, 0.18, 1);
+    /* Hint compositor: only opacity+transform will change */
+    will-change: opacity, transform;
   }
 
-  .smooth-scroll {
-    @apply scroll-smooth;
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    /* Release will-change after animation completes */
+    will-change: auto;
   }
 
-  .gradient-dark {
-    @apply bg-gradient-to-r from-marsa-deep via-marsa-deep/56 to-marsa-deep/12;
-  }
-
-  .gradient-dark-overlay {
-    @apply bg-gradient-to-b from-marsa-deep/82 to-marsa-deep/0;
-  }
-
+  /* ── Named animations ── */
   .animate-rise {
     animation: rise 0.9s cubic-bezier(0.22, 0.75, 0.18, 1) both;
   }
 
   .animate-fade {
-    animation: fade 0.2s ease both;
+    animation: fade 0.6s ease both;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2.4s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* ── Below-fold section rendering skip ── */
+  .section-offscreen {
+    content-visibility: auto;
+    /* Estimated height so scroll bar doesn't jump */
+    contain-intrinsic-size: 0 600px;
   }
 
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
@@ -196,24 +252,27 @@
   }
 
   @keyframes fade {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 
-  .reveal {
-    @apply opacity-0 translate-y-6 transition-all;
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(5px); }
   }
 
-  .reveal.is-visible {
-    @apply opacity-100 translate-y-0;
+  /* ── Gradient utilities ── */
+  .gradient-dark {
+    @apply bg-gradient-to-r from-marsa-deep via-marsa-deep/56 to-marsa-deep/12;
   }
 
+  .gradient-dark-overlay {
+    @apply bg-gradient-to-b from-marsa-deep/80 to-transparent;
+  }
+
+  /* ── Misc ── */
   .hover-lift {
-    @apply hover:-translate-y-1 transition-transform;
+    @apply hover:-translate-y-1 transition-transform duration-200;
   }
 
   .hover-brighten {
@@ -227,12 +286,36 @@
   .light-only {
     @apply block dark:hidden;
   }
+
+  /* ── Glassmorphism surface ── */
+  .glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-dark {
+    background: rgba(7, 20, 23, 0.72);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    @apply !scroll-auto !animate-none !transition-none;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

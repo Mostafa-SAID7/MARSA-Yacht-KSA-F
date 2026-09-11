@@ -1,12 +1,35 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'services', component: HomeComponent, data: { anchor: 'services' } },
-  { path: 'provisioning', component: HomeComponent, data: { anchor: 'provisioning' } },
-  { path: 'destinations', component: HomeComponent, data: { anchor: 'destinations' } },
-  { path: 'about', component: HomeComponent, data: { anchor: 'about' } },
-  { path: 'contact', component: HomeComponent, data: { anchor: 'contact' } },
+  {
+    path: '',
+    loadComponent: () => import('./pages/home.component').then(m => m.HomeComponent),
+    pathMatch: 'full',
+  },
+  {
+    path: 'services',
+    loadComponent: () => import('./pages/home.component').then(m => m.HomeComponent),
+    data: { anchor: 'services' },
+  },
+  {
+    path: 'provisioning',
+    loadComponent: () => import('./pages/home.component').then(m => m.HomeComponent),
+    data: { anchor: 'provisioning' },
+  },
+  {
+    path: 'destinations',
+    loadComponent: () => import('./pages/home.component').then(m => m.HomeComponent),
+    data: { anchor: 'destinations' },
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./pages/home.component').then(m => m.HomeComponent),
+    data: { anchor: 'about' },
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./pages/home.component').then(m => m.HomeComponent),
+    data: { anchor: 'contact' },
+  },
   { path: '**', redirectTo: '' },
 ];

@@ -11,11 +11,68 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { copy, destinations, products, services, steps } from '../data/content';
 import { SitePreferencesService } from '../services/site-preferences.service';
+import { HeroComponent } from '../components/sections/hero/hero.component';
+import { IntroComponent } from '../components/sections/intro/intro.component';
+import { ServicesComponent } from '../components/sections/services/services.component';
+import { ProvisioningComponent } from '../components/sections/provisioning/provisioning.component';
+import { ProductsComponent } from '../components/sections/products/products.component';
+import { DestinationsComponent } from '../components/sections/destinations/destinations.component';
+import { AboutComponent } from '../components/sections/about/about.component';
+import { TestimonialsComponent } from '../components/sections/testimonials/testimonials.component';
+import { CtaComponent } from '../components/sections/cta/cta.component';
+import {
+  LucideArrowUpRight,
+  LucideArrowDown,
+  LucideArrowRight,
+  LucideSun,
+  LucideMoon,
+  LucideGlobe,
+  LucideMenu,
+  LucideX,
+  LucideCheck,
+  LucidePlus,
+  LucideShare2,
+  LucideAnchor,
+  LucideMapPin,
+  LucidePhone,
+  LucideMail,
+  LucideExternalLink,
+} from '@lucide/angular';
 
 @Component({
   selector: 'marsa-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    HeroComponent,
+    IntroComponent,
+    ServicesComponent,
+    ProvisioningComponent,
+    ProductsComponent,
+    DestinationsComponent,
+    AboutComponent,
+    TestimonialsComponent,
+    CtaComponent,
+    // Lucide icon directives (attribute-selector standalone components)
+    LucideArrowUpRight,
+    LucideArrowDown,
+    LucideArrowRight,
+    LucideSun,
+    LucideMoon,
+    LucideGlobe,
+    LucideMenu,
+    LucideX,
+    LucideCheck,
+    LucidePlus,
+    LucideShare2,
+    LucideAnchor,
+    LucideMapPin,
+    LucidePhone,
+    LucideMail,
+    LucideExternalLink,
+  ],
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

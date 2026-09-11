@@ -76,6 +76,38 @@ export interface SiteCopy {
     viewCollection: LocalizedText;
     explore: LocalizedText;
   };
+  featuresBand: {
+    col1Title: LocalizedText;
+    col1Body: LocalizedText;
+    col2Title: LocalizedText;
+    col2Body: LocalizedText;
+    col3Title: LocalizedText;
+    col3Body: LocalizedText;
+  };
+  form: {
+    title: LocalizedText;
+    subtitle: LocalizedText;
+    galley: LocalizedText;
+    interior: LocalizedText;
+    meat: LocalizedText;
+    fish: LocalizedText;
+    dairy: LocalizedText;
+    fruit: LocalizedText;
+    bread: LocalizedText;
+    beverages: LocalizedText;
+    herbs: LocalizedText;
+    bespoke: LocalizedText;
+    general: LocalizedText;
+    toiletries: LocalizedText;
+    flowers: LocalizedText;
+    janitorial: LocalizedText;
+    crew: LocalizedText;
+    name: LocalizedText;
+    phone: LocalizedText;
+    yacht: LocalizedText;
+    chef: LocalizedText;
+    submit: LocalizedText;
+  };
   footer: {
     descriptor: LocalizedText;
     navigation: LocalizedText;
@@ -156,6 +188,38 @@ export const copy: SiteCopy = {
     viewCollection: { en: 'View collection', ar: 'استعرض المجموعة' },
     explore: { en: 'Explore destination', ar: 'اكتشف الوجهة' },
   },
+  featuresBand: {
+    col1Title: { en: '1 HR RESPONSE TIME', ar: 'استجابة خلال ساعة' },
+    col1Body: { en: 'Quick response. We are the most trusted provisioning company in the Red Sea.', ar: 'استجابة سريعة. نحن شركة التموين الأكثر ثقة في البحر الأحمر.' },
+    col2Title: { en: '48 HOURS DELIVERIES', ar: 'توصيل خلال ٤٨ ساعة' },
+    col2Body: { en: 'Get the provisions you need, when you need them. Offshore or anchored, we\'ve got you covered.', ar: 'احصل على التموين الذي تحتاجه متى شئت. في عرض البحر أو في المرسى، نحن نغطيك.' },
+    col3Title: { en: 'FRESH & HIGH QUALITY PRODUCTS', ar: 'منتجات طازجة وعالية الجودة' },
+    col3Body: { en: 'We pride ourselves on offering not only the best food and beverages available locally, but importing specialty items.', ar: 'نفتخر بتقديم أفضل الأطعمة والمشروبات المتاحة محليًا، واستيراد العناصر المتخصصة.' },
+  },
+  form: {
+    title: { en: 'What you need?', ar: 'ماذا تحتاج؟' },
+    subtitle: { en: 'Please complete this short form with your full details. On receipt we will forward our latest Provisions Directory.', ar: 'يرجى إكمال هذا النموذج القصير بتفاصيلك الكاملة. عند الاستلام، سنرسل أحدث دليل للتموين لدينا.' },
+    galley: { en: 'Galley >>', ar: 'المطبخ >>' },
+    interior: { en: 'Interior >>', ar: 'الداخلي >>' },
+    meat: { en: 'Meat & Poultry', ar: 'اللحوم والدواجن' },
+    fish: { en: 'Fish & SeaFood', ar: 'الأسماك والمأكولات البحرية' },
+    dairy: { en: 'Dairy & Cheese', ar: 'الألبان والأجبان' },
+    fruit: { en: 'Fruit & Vegetables', ar: 'الفواكه والخضروات' },
+    bread: { en: 'Bread & Baking', ar: 'المخبوزات' },
+    beverages: { en: 'Beverages & Bar Supplies', ar: 'المشروبات ومستلزمات البار' },
+    herbs: { en: 'Herbs & Spice', ar: 'الأعشاب والبهارات' },
+    bespoke: { en: 'A Bespoke Service', ar: 'خدمة مخصصة' },
+    general: { en: 'General Groceries', ar: 'بقالة عامة' },
+    toiletries: { en: 'Toiletries', ar: 'مستلزمات العناية الشخصية' },
+    flowers: { en: 'Flowers & Interior Essentials', ar: 'الزهور والمستلزمات الداخلية' },
+    janitorial: { en: 'Janitorial', ar: 'مستلزمات التنظيف' },
+    crew: { en: 'Crew supplies', ar: 'مستلزمات الطاقم' },
+    name: { en: 'Name*', ar: 'الاسم*' },
+    phone: { en: 'Phone Number*', ar: 'رقم الهاتف*' },
+    yacht: { en: 'Yacht Name*', ar: 'اسم اليخت*' },
+    chef: { en: 'Chef', ar: 'الشيف' },
+    submit: { en: 'Submit', ar: 'إرسال' },
+  },
   footer: {
     descriptor: { en: 'Saudi Marine Hospitality & Provisioning', ar: 'الضيافة والتموين البحري السعودي' },
     navigation: { en: 'Navigate', ar: 'تصفح' },
@@ -194,7 +258,7 @@ export const services: ServiceItem[] = [
     eyebrow: '04',
     title: { en: 'Yacht services', ar: 'خدمات اليخوت' },
     description: { en: 'Reliable support across the Saudi Red Sea.', ar: 'خدمات بحرية موثوقة في أنحاء البحر الأحمر السعودي.' },
-    image: '/assets/marsa-marina.jpg',
+    image: '/assets/marsa-seafood.jpg',
     accent: 'blue',
   },
 ];

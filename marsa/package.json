@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "ng serve --host localhost --port 4200 --configuration development",
     "dev": "ng serve --host localhost --port 4200 --configuration development",
     "build": "ng build --configuration production",
     "serve": "ng serve --host localhost --port 4200 --configuration production",

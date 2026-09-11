@@ -1,12 +1,12 @@
 <div
   #page
-  class="min-h-screen overflow-hidden bg-marsa-pearl dark:bg-marsa-dark-pearl text-marsa-ink dark:text-marsa-dark-ink"
+  class="min-h-screen overflow-hidden bg-marsa-surface dark:bg-marsa-dark-surface text-marsa-ink dark:text-marsa-dark-ink"
   [class.menu-open]="isMenuOpen"
   [class.modal-open]="isRequestOpen"
   [attr.dir]="preferences.locale() === 'ar' ? 'rtl' : 'ltr'"
 >
   <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
-  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-6xl px-4 md:px-6">
     <div class="marsa-nav flex items-center gap-4 px-4 md:px-5 h-14 rounded-marsa-pill">
 
       <!-- Brand Logo -->
@@ -109,7 +109,7 @@
 
   <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer class="bg-marsa-ink dark:bg-marsa-dark-deep text-marsa-pearl border-t border-white/[0.08]">
-    <div class="max-w-5xl mx-auto px-6 md:px-8 py-16">
+    <div class="max-w-6xl mx-auto px-6 md:px-10 py-16">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
 
         <!-- Brand -->

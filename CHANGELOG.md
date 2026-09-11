@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/compare/v1.0.0...v1.0.1) (2026-09-11)
+
+
+### Bug Fixes
+
+* add vercel.json to fix 404 - point outputDirectory to dist/public/browser ([5430ed7](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/5430ed7f8b6af90505dad52c3472c94e9afbf438))
+
 # 1.0.0 (2026-09-11)
 
 

@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/compare/v1.0.1...v1.0.2) (2026-09-11)
+
+
+### Bug Fixes
+
+* move vercel.json inside marsa/ - remove cd marsa from buildCommand ([6cf42f2](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/commit/6cf42f27f3d905a2cabaea791bd6a0d979fc2922))
+
 ## [1.0.1](https://github.com/Mostafa-SAID7/MARSA-Yacht-KSA-F/compare/v1.0.0...v1.0.1) (2026-09-11)
 
 

@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd marsa && npm install && npm run build",
+  "outputDirectory": "marsa/dist/public/browser",
+  "installCommand": "echo skip",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -235,7 +235,7 @@
   }
 
   .dark .section-panel {
-    @apply border-marsa-dark-line bg-marsa-dark-deep text-marsa-dark-ink;
+    @apply border-white/10 bg-marsa-dark-deep text-marsa-dark-ink;
   }
 
   /* ── Grid helpers ── */

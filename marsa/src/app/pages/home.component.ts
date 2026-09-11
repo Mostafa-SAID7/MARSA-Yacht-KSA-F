@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { copy, destinations, products, services, steps } from '../data/content';
 import { SitePreferencesService } from '../services/site-preferences.service';
 import { Header } from '../components/layout/header/header';
@@ -34,7 +34,6 @@ import {
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink,
     Header,
     Footer,
     HeroComponent,
